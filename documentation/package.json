@@ -1,0 +1,21 @@
+{
+	"name": "overflowed-documentation",
+	"type": "module",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/react": "1.2.2",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"astro": "1.6.7",
+		"react": "*",
+		"react-dom": "*"
+	}
+}

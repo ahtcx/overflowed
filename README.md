@@ -1,0 +1,7 @@
+- accessible
+- flexible
+- works on all major frameworks
+- lightweight
+- nice API
+- modern
+- RTL
