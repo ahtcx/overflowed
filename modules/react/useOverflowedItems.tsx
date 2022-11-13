@@ -1,72 +1,62 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { HIDDEN_STYLE, Overflowed, OverflowedOptions } from "../core/Overflowed";
+import { Overflowed, OverflowedOptions } from "../core/Overflowed";
+import { defaultCreateGetContainerProps } from "./defaultCreateGetContainerProps";
 
-export const useOverflowedItems = <Item extends any>(items: Item[], options?: Omit<OverflowedOptions, "onRender">) => {
-	const [visibleItemCount, setVisibleItemCount] = useState(items.length);
-	const [indicatorElementOffset, setIndicatorElementOffset] = useState(0);
+import { defaultCreateGetIndicatorProps } from "./defaultCreateGetIndicatorProps";
+import { defaultCreateGetItemProps } from "./defaultCreateGetItemProps";
+
+export interface UseOverflowedItemsState {
+	visibleItemCount: number;
+	indicatorElementOffset: number;
+	isMounted: boolean;
+}
+
+export interface UseOverflowedItemsOptions extends Omit<OverflowedOptions, "onUpdate"> {}
+
+export const useOverflowedItems = <Item extends any>(items: Item[], options: UseOverflowedItemsOptions = {}) => {
+	const [state, setState] = useState<UseOverflowedItemsState>({
+		visibleItemCount: items.length,
+		indicatorElementOffset: 0,
+		isMounted: false,
+	});
 
 	const overflowedRef = useRef(
 		new Overflowed({
 			...options,
-			onRender(newVisibleItemCount, newIndicatorElementOffset) {
-				setVisibleItemCount(newVisibleItemCount);
-				setIndicatorElementOffset(newIndicatorElementOffset);
-			},
+			onUpdate: (newVisibleItemCount, newIndicatorElementOffset) =>
+				setState(({ isMounted }) => ({
+					isMounted,
+					visibleItemCount: newVisibleItemCount,
+					indicatorElementOffset: newIndicatorElementOffset,
+				})),
 		}),
 	);
 
 	useEffect(() => {
-		overflowedRef.current.onContainerElementDidMount();
-
-		return () => {
-			overflowedRef.current.onContainerElementWillUnmount();
-		};
+		setState((previousState) => ({ ...previousState, isMounted: true }));
+		return () => overflowedRef.current.onContainerElementWillUnmount();
 	}, []);
 
 	const overflowedItems = useMemo(
 		() =>
 			items.map((item, index) => ({
-				props: {
-					ref: <ItemElement extends Element | null>(itemElement: ItemElement) => {
-						if (!itemElement) return; // throw new Error("TODO: 4");
-						overflowedRef.current.registerItemElement(itemElement);
-					},
-					style: { flexShrink: 0, ...(index >= visibleItemCount ? HIDDEN_STYLE : {}) },
-					"aria-hidden": index >= visibleItemCount,
-				},
+				getProps: defaultCreateGetItemProps(index >= state.visibleItemCount, overflowedRef.current, state),
 				item,
 			})),
-		[items, visibleItemCount],
+		[items, state.visibleItemCount],
 	);
 
-	const extraItems = useMemo(() => items.slice(visibleItemCount), [visibleItemCount]);
+	const extraItems = useMemo(() => items.slice(state.visibleItemCount), [state.visibleItemCount]);
 
-	const props = {
-		containerProps: {
-			ref: <ContainerElement extends Element | null>(containerElement: ContainerElement) => {
-				if (!containerElement) return; // throw new Error("TODO 1");
-				overflowedRef.current.registerContainerElement(containerElement);
-			},
-			style: overflowedRef.current.getContainerElementStyles(),
-		},
-		indicatorProps: {
-			ref: <IndicatorElement extends Element | null>(indicatorElement: IndicatorElement) => {
-				if (!indicatorElement) return; // throw new Error("TODO 2");
-				overflowedRef.current.registerIndicatorElement(indicatorElement);
-			},
-			style: {
-				...overflowedRef.current.getIndicatorElementStyles(),
-				...(extraItems.length > 0
-					? ({
-							position: "absolute",
-							left: indicatorElementOffset,
-							whiteSpace: "nowrap",
-					  } as const)
-					: HIDDEN_STYLE),
-			},
-		},
-	};
+	const props = useMemo(
+		() => ({
+			getContainerProps: defaultCreateGetContainerProps(overflowedRef.current, state),
+			getIndicatorProps: defaultCreateGetIndicatorProps(overflowedRef.current, state),
+			isIndicatorVisible: extraItems.length > 0,
+		}),
+		[state, extraItems],
+	);
 
 	return [overflowedItems, extraItems, props] as const;
 };

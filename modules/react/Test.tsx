@@ -1,7 +1,11 @@
 import { useOverflowedItems } from "./useOverflowedItems";
 
-export const Test = () => {
-	const [items, extra, { containerProps, indicatorProps }] = useOverflowedItems(
+export interface TestProps {
+	className: string;
+}
+
+export const Test = ({ className }: TestProps) => {
+	const [items, extra, { getContainerProps, getIndicatorProps, isIndicatorVisible }] = useOverflowedItems(
 		// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233],
 		[1, 2, 3],
 		{
@@ -10,13 +14,13 @@ export const Test = () => {
 	);
 
 	return (
-		<div {...containerProps}>
-			{items.map(({ item, props }, index) => (
-				<div key={index} {...props}>
+		<div className={className} {...getContainerProps()}>
+			{items.map(({ item, getProps }, index) => (
+				<div key={index} {...getProps()}>
 					fibonacci({index}) = {item};&nbsp;
 				</div>
 			))}
-			{extra.length > 0 && <div {...indicatorProps}>indicator {extra.length}</div>}
+			{isIndicatorVisible && <div {...getIndicatorProps({ style: { width: 200 } })}>indicator {extra.length}</div>}
 		</div>
 	);
 };

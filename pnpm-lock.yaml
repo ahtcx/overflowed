@@ -9,14 +9,14 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       tsup: 6.4.0
-      typescript: 4.8.4
+      typescript: 4.9.2-rc
     devDependencies:
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.8
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      tsup: 6.4.0_typescript@4.8.4
-      typescript: 4.8.4
+      tsup: 6.4.0_typescript@4.9.2-rc
+      typescript: 4.9.2-rc
 
   documentation:
     specifiers:
@@ -3605,7 +3605,7 @@ packages:
       esbuild: 0.14.54
     dev: false
 
-  /tsup/6.4.0_typescript@4.8.4:
+  /tsup/6.4.0_typescript@4.9.2-rc:
     resolution: {integrity: sha512-4OlbqIK/SF+cJp0mMqPM2pKULvgj/1S2Gm3I1aFoFGIryUOyIqPZBoqKkqVQT6uFtWJ5AHftIv0riXKfHox1zQ==}
     engines: {node: '>=14'}
     hasBin: true
@@ -3635,7 +3635,7 @@ packages:
       source-map: 0.8.0-beta.0
       sucrase: 3.28.0
       tree-kill: 1.2.2
-      typescript: 4.8.4
+      typescript: 4.9.2-rc
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -3655,6 +3655,13 @@ packages:
     resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: false
+
+  /typescript/4.9.2-rc:
+    resolution: {integrity: sha512-Ly9UUxJBfiiFjfegI1gsW9FI8Xhw1cuwRMBJ4wdYg+UXZR4VnZvD1OnBDj/iQ2U+tWbWEjYqJ5xx1Cwr4Vsa4w==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
 
   /unherit/3.0.0:
     resolution: {integrity: sha512-UmvIQZGEc9qdLIQ8mv8/61n6PiMgfbOoASPKHpCvII5srShCQSa6jSjBjlZOR4bxt2XnT6uo6csmPKRi+zQ0Jg==}

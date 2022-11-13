@@ -1,116 +1,80 @@
 export interface OverflowedOptions {
 	direction?: "horizontal" | "vertical";
-	onRender: (visibleItemCount: number, indicatorElementOffset: number) => void;
+	onUpdate: (visibleItemCount: number, indicatorElementOffset: number) => void;
+	disableIndicatorResizeProtection?: boolean;
 
 	ResizeObserver?: typeof ResizeObserver;
-	IntersectionObserver?: typeof IntersectionObserver;
 }
 
-export const HIDDEN_STYLE = {
-	userSelect: "none",
-	pointerEvents: "none",
-	visibility: "hidden",
-} as const;
-
 export class Overflowed {
-	// private IntersectionObserver: typeof IntersectionObserver | undefined;
+	public readonly direction;
 
-	private direction;
-	private onRender;
+	private onUpdate;
 
 	private resizeObserver: ResizeObserver | undefined;
-	// private intersectionObserver: IntersectionObserver | undefined;
 
 	private containerElement?: Element | undefined;
 	private indicatorElement?: Element | undefined;
 
-	private isMounted = false;
+	private disableIndicatorResizeProtection;
+	private indicatorSize?: number;
 
 	constructor({
 		ResizeObserver = typeof window === "undefined" ? undefined : window.ResizeObserver,
-		// IntersectionObserver = typeof window === "undefined" ? undefined : window.IntersectionObserver,
 		//
 		direction = "horizontal",
-		onRender,
+		onUpdate,
+		disableIndicatorResizeProtection,
 	}: OverflowedOptions) {
-		// this.IntersectionObserver = IntersectionObserver;
+		this.resizeObserver =
+			ResizeObserver &&
+			new ResizeObserver((entries) => {
+				for (const entry of entries) {
+					if (entry.target === this.indicatorElement) {
+						if (entry.target.clientWidth > 0 && entry.target.clientWidth !== this.indicatorSize)
+							console.warn("width doesn't match", this.indicatorSize, entry.target.clientWidth);
 
-		this.resizeObserver = ResizeObserver && new ResizeObserver(() => this.requestUpdate());
+						this.indicatorSize = entry.target.clientWidth;
+					}
+				}
+				this.requestUpdate();
+			});
 
 		this.direction = direction;
-		this.onRender = onRender;
+		this.onUpdate = onUpdate;
+		this.disableIndicatorResizeProtection = disableIndicatorResizeProtection;
 	}
 
 	public registerContainerElement(containerElement: Element) {
 		this.containerElement = containerElement;
 
-		// if (this.IntersectionObserver)
-		// 	this.intersectionObserver = new this.IntersectionObserver(
-		// 		(entries) => {
-		// 			for (const entry of entries) {
-		// 				const index = Array.from(containerElement.children).indexOf(entry.target);
-		// 				if (index >= 0) {
-		// 					return;
-		// 				}
-		// 			}
-		// 		},
-		// 		{ root: containerElement, threshold: 1 },
-		// 	);
-
 		this.resizeObserver?.observe(containerElement);
 		this.requestUpdate();
 	}
 
-	/** Returns styles which must be applied to the container element. */
-	public getContainerElementStyles() {
-		return {
-			display: "flex",
-			position: "relative",
-			flexDirection: this.direction === "horizontal" ? "row" : "column",
-			[(this.direction === "horizontal" ? "overflowX" : "overflowY") as "overflowX"]: this.isMounted ? "clip" : "auto",
-		} as const;
-	}
-
 	public registerIndicatorElement(indicatorElement: Element) {
 		this.indicatorElement = indicatorElement;
+		this.indicatorSize = indicatorElement.clientWidth;
 
 		this.resizeObserver?.observe(indicatorElement);
-		// this.intersectionObserver?.observe(indicatorElement);
-
 		this.requestUpdate();
-	}
-
-	/** Returns styles which must be applied to the indicator element. */
-	public getIndicatorElementStyles() {
-		return {
-			// display: this.isMounted ? undefined : "none",
-		} as const;
 	}
 
 	public registerItemElement(itemElement: Element) {
 		this.resizeObserver?.observe(itemElement);
-		// this.intersectionObserver?.observe(itemElement);
 
 		this.requestUpdate();
 	}
 
-	/** Should be called after the container element is mounted. */
-	public onContainerElementDidMount() {
-		this.isMounted = true;
-	}
-
 	/** Should be called before the container element is unmounted. */
 	public onContainerElementWillUnmount() {
-		this.isMounted = false;
-
 		this.resizeObserver?.disconnect();
-		// this.intersectionObserver?.disconnect();
 
 		this.containerElement = undefined;
 		this.indicatorElement = undefined;
 	}
 
-	private previousChildOffsets = [0, 0];
+	// private previousChildOffsets = [0, 0];
 	private update() {
 		if (!this.containerElement) return; // throw new Error("TODO 3");
 
@@ -136,12 +100,12 @@ export class Overflowed {
 				// const first = this.previousChildOffsets.shift();
 				// this.previousChildOffsets.push(childOffset);
 				// if (first !== childOffset)
-				this.onRender(index, childOffset);
+				this.onUpdate(index, childOffset);
 				return;
 			}
 		}
 
-		this.onRender(childrenArray.length, 0);
+		this.onUpdate(childrenArray.length, 0);
 	}
 
 	private requestedUpdate = false;

@@ -1,0 +1,25 @@
+---
+export interface Props {
+	children: any;
+}
+---
+
+<div class="container">
+	<input class="is-rtl" type="checkbox" />
+	<div class="test">
+		<slot />
+	</div>
+</div>
+<style>
+	.container {
+		background-color: gray;
+		padding: 8px;
+		resize: horizontal;
+		overflow: hidden;
+	}
+</style>
+<style>
+	.is-rtl:checked + .test {
+		direction: rtl;
+	}
+</style>
