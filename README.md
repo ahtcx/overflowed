@@ -5,3 +5,5 @@
 - nice API
 - modern
 - RTL
+- listens to container resizes
+- optimized, performant
