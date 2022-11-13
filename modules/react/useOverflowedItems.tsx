@@ -12,9 +12,14 @@ export interface UseOverflowedItemsState {
 	isMounted: boolean;
 }
 
-export interface UseOverflowedItemsOptions extends Omit<OverflowedOptions, "onUpdate"> {}
+export interface UseOverflowedItemsOptions extends Omit<OverflowedOptions, "onUpdate"> {
+	enableEmptyOverflowedItems?: boolean;
+}
 
-export const useOverflowedItems = <Item extends any>(items: Item[], options: UseOverflowedItemsOptions = {}) => {
+export const useOverflowedItems = <Item extends any>(
+	items: Item[],
+	{ enableEmptyOverflowedItems, ...options }: UseOverflowedItemsOptions = {},
+) => {
 	const [state, setState] = useState<UseOverflowedItemsState>({
 		visibleItemCount: items.length,
 		indicatorElementOffset: 0,
@@ -38,7 +43,7 @@ export const useOverflowedItems = <Item extends any>(items: Item[], options: Use
 		return () => overflowedRef.current.onContainerElementWillUnmount();
 	}, []);
 
-	const overflowedItems = useMemo(
+	const visibleItems = useMemo(
 		() =>
 			items.map((item, index) => ({
 				getProps: defaultCreateGetItemProps(index >= state.visibleItemCount, overflowedRef.current, state),
@@ -47,16 +52,24 @@ export const useOverflowedItems = <Item extends any>(items: Item[], options: Use
 		[items, state.visibleItemCount],
 	);
 
-	const extraItems = useMemo(() => items.slice(state.visibleItemCount), [state.visibleItemCount]);
+	// TODO: type this depending on options
+	const overflowedItems = useMemo(
+		() =>
+			state.visibleItemCount < items.length
+				? items.slice(state.visibleItemCount)
+				: enableEmptyOverflowedItems
+				? []
+				: undefined,
+		[state.visibleItemCount, enableEmptyOverflowedItems],
+	);
 
 	const props = useMemo(
 		() => ({
 			getContainerProps: defaultCreateGetContainerProps(overflowedRef.current, state),
-			getIndicatorProps: defaultCreateGetIndicatorProps(overflowedRef.current, state),
-			isIndicatorVisible: extraItems.length > 0,
+			getIndicatorProps: defaultCreateGetIndicatorProps(overflowedRef.current, state, Boolean(overflowedItems?.length)),
 		}),
-		[state, extraItems],
+		[state, overflowedItems],
 	);
 
-	return [overflowedItems, extraItems, props] as const;
+	return [visibleItems, overflowedItems, props] as const;
 };
