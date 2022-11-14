@@ -13,7 +13,6 @@ const a = import.meta.glob(
 );
 
 console.log(Object.entries(a));
-throw 0;
 
 export default defineConfig({
 	integrations: [mdx(), react()],
