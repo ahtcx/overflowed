@@ -7,3 +7,6 @@
 - RTL
 - listens to container resizes
 - optimized, performant
+- no dependencies
+- can provide polyfills
+- falls back nicely when SSR

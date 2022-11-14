@@ -3,6 +3,10 @@
 	"type": "module",
 	"version": "0.0.0",
 	"private": true,
+	"exports": {
+		"./core": "./dist/core/index.js",
+		"./react": "./dist/react/index.js"
+	},
 	"scripts": {
 		"build": "tsup",
 		"dev": "pnpm --recursive dev"
@@ -14,5 +18,9 @@
 		"react-dom": "18.2.0",
 		"tsup": "6.4.0",
 		"typescript": "4.9.2-rc"
+	},
+	"peerDependencies": {
+		"@types/react": "^17.0.0 || ^18.0.0",
+		"react": "^17.0.0 || ^18.0.0"
 	}
 }
