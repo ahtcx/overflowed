@@ -8,8 +8,4 @@ export default defineConfig({
 	integrations: [mdx(), react()],
 	output: "server",
 	adapter: vercel(),
-
-	markdown: {
-		syntaxHighlight: "prism",
-	},
 });

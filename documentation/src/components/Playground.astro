@@ -1,5 +1,6 @@
 ---
 import { Code } from "astro/components";
+import theme from "shiki/themes/github-dark.json";
 
 export interface Props {
 	children: any;
@@ -23,7 +24,12 @@ const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
 		source && (
 			<details>
 				<summary>Source code</summary>
-				<Code code={source.replace(DOCS_HIDDEN_REGEX, "").replace(TWO_MANY_NEWLINE_REGEX, "\n\n")} lang="tsx" />
+				<Code
+					code={source.replace(DOCS_HIDDEN_REGEX, "").replace(TWO_MANY_NEWLINE_REGEX, "\n\n")}
+					lang="tsx"
+					// TODO: hopefully fixed?
+					theme={theme as any}
+				/>
 			</details>
 		)
 	}

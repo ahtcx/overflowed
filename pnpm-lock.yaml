@@ -29,6 +29,7 @@ importers:
       react: '*'
       react-dom: '*'
       rollup: 3.3.0
+      shiki: 0.11.1
     dependencies:
       '@astrojs/mdx': 0.11.6_rollup@3.3.0
       '@astrojs/react': 1.2.2_gqczyrwmhlwpr6z64d3xh3wv54
@@ -39,6 +40,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       rollup: 3.3.0
+      shiki: 0.11.1
 
 packages:
 
