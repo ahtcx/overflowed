@@ -19,4 +19,5 @@ export const people = [
 		.map((p) => p[0])
 		.join(""),
 	name,
+	color: `hsl(${index * 100}, 50%, 50%)`,
 }));

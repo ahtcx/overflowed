@@ -3,13 +3,14 @@
 	padding: 8px;
 	border-radius: 50%;
 	border: 2px solid #aaa;
-	width: 40px;
-	height: 40px;
+	width: 48px;
+	height: 48px;
 	box-sizing: border-box;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 }
 
 .avatar:not(:first-of-type) {
-	margin-inline-start: -16px;
+	margin-inline-start: -12px;
 }

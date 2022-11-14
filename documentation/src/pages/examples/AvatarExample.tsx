@@ -11,7 +11,7 @@ export const AvatarExample = () => {
 	return (
 		<div {...getContainerProps()}>
 			{visiblePeople.map(({ item, getProps }) => (
-				<div key={item.id} className="avatar" {...getProps()}>
+				<div key={item.id} className="avatar" {...getProps({ style: { backgroundColor: item.color } })}>
 					{item.initials}
 				</div>
 			))}

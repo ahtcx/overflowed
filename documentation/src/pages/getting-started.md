@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/Doc.astro
+layout: ~/layouts/Documentation.astro
 ---
 
 # Getting Started
