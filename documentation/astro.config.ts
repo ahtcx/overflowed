@@ -4,7 +4,7 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel/serverless";
 
-const a = import.meta.glob("../node_modules/**/shiki/**/*.json", { exhaustive: true });
+const a = import.meta.glob("../node_modules/.pnpm/**/shiki/**/*.json", { exhaustive: true });
 
 console.log(Object.entries(a)[0]);
 
