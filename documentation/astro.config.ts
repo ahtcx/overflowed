@@ -7,5 +7,7 @@ import vercel from "@astrojs/vercel/serverless";
 export default defineConfig({
 	integrations: [mdx(), react()],
 	output: "server",
-	adapter: vercel(),
+	adapter: vercel({
+		includeFiles: ["./node_modules/shiki/themes/github-dark.json"],
+	}),
 });
