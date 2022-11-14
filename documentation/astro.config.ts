@@ -8,6 +8,6 @@ export default defineConfig({
 	integrations: [mdx(), react()],
 	output: "server",
 	adapter: vercel({
-		includeFiles: ["**/node_modules/.pnpm/**/shiki/**/*.json"],
+		includeFiles: ["**/**/shiki/**/*.json"],
 	}),
 });
