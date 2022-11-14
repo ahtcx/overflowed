@@ -18,6 +18,6 @@ export default defineConfig({
 	integrations: [mdx(), react()],
 	output: "server",
 	adapter: vercel({
-		includeFiles: Object.values(a),
+		includeFiles: Object.keys(a),
 	}),
 });
