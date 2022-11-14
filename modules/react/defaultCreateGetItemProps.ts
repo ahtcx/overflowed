@@ -9,7 +9,7 @@ export type CreateGetItemProps<F extends (...a: any[]) => {}> = (
 ) => F;
 
 export interface DefaultCreateGetItemPropsOptions {
-	style?: Record<string, any>;
+	style?: {};
 }
 
 export const defaultCreateGetItemProps = ((isHidden, overflowed, state) =>
@@ -25,7 +25,7 @@ export const defaultCreateGetItemProps = ((isHidden, overflowed, state) =>
 						userSelect: "none",
 						pointerEvents: "none",
 						visibility: "hidden",
-				  }
+				  } as const
 				: {}),
 			...style,
 		} as const,

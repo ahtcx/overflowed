@@ -5,21 +5,22 @@ export interface Props {
 ---
 
 <div class="container">
-	<input class="is-rtl" type="checkbox" />
-	<div class="test">
-		<slot />
+	<label><input class="is-rtl" type="checkbox" /> RTL</label>
+	<div class="sandbox-wrapper">
+		<div class="sandbox">
+			<slot />
+		</div>
 	</div>
 </div>
 <style>
-	.container {
+	.container:has(.is-rtl:checked) .sandbox-wrapper {
+		direction: rtl;
+	}
+
+	.sandbox {
 		background-color: gray;
 		padding: 8px;
 		resize: horizontal;
 		overflow: hidden;
-	}
-</style>
-<style>
-	.is-rtl:checked + .test {
-		direction: rtl;
 	}
 </style>

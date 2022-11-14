@@ -1,0 +1,19 @@
+---
+title: Examples
+layout: ../../layouts/Doc.astro
+---
+
+import Playground from "../../components/Playground.astro";
+
+Hello world
+
+import { AvatarExample } from "./AvatarExample.tsx";
+import raw from "./AvatarExample.tsx?raw";
+
+<Playground>
+	<AvatarExample client:load />
+</Playground>
+
+import { Code } from "astro/components";
+
+<Code code={raw.replace(/\/\/\s?@docs-hidden\n(.*)\n/g, "").replace(/\n{2,}/g, "\n\n")} lang="tsx" />

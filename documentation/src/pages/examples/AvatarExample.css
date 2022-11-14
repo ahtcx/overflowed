@@ -1,0 +1,15 @@
+.avatar {
+	background-color: gray;
+	padding: 8px;
+	border-radius: 50%;
+	border: 2px solid #aaa;
+	width: 40px;
+	height: 40px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+}
+
+.avatar:not(:first-of-type) {
+	margin-inline-start: -16px;
+}
