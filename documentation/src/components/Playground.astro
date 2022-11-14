@@ -1,5 +1,6 @@
 ---
 import { Code } from "astro/components";
+import lang from 'shiki/languages/tsx.tmLanguage.json'
 import theme from "shiki/themes/github-dark.json";
 
 export interface Props {
@@ -26,7 +27,8 @@ const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
 				<summary>Source code</summary>
 				<Code
 					code={source.replace(DOCS_HIDDEN_REGEX, "").replace(TWO_MANY_NEWLINE_REGEX, "\n\n")}
-					lang="tsx"
+					// TODO: hopefully fixed?
+					lang={lang as any}
 					// TODO: hopefully fixed?
 					theme={theme as any}
 				/>
