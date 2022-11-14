@@ -4,14 +4,21 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel/serverless";
 
-const a = import.meta.glob("../node_modules/.pnpm/**/shiki/**/*.json", { exhaustive: true });
+const a = import.meta.glob(
+	[
+		"../node_modules/.pnpm/**/shiki/languages/(tsx).tmLanguage.json",
+		"../node_modules/.pnpm/**/shiki/themes/(github-dark).json",
+	],
+	{ eager: true },
+);
 
-console.log(Object.entries(a)[0]);
+console.log(Object.entries(a));
+throw 0;
 
 export default defineConfig({
 	integrations: [mdx(), react()],
 	output: "server",
 	adapter: vercel({
-		includeFiles: ["../**/**/shiki/**/**/*.json"],
+		includeFiles: Object.values(a),
 	}),
 });
