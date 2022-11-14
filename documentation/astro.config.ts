@@ -6,7 +6,7 @@ import vercel from "@astrojs/vercel/serverless";
 
 const a = import.meta.glob("../node_modules/**/shiki/**/*.json", { exhaustive: true });
 
-console.log(Object.values(a).length);
+console.log(Object.values(a)[0]);
 
 export default defineConfig({
 	integrations: [mdx(), react()],
