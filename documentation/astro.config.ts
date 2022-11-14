@@ -8,6 +8,6 @@ export default defineConfig({
 	integrations: [mdx(), react()],
 	output: "server",
 	adapter: vercel({
-		includeFiles: ["./node_modules/shiki/themes/github-dark.json"],
+		includeFiles: ["/var/task/node_modules/.pnpm/shiki@0.11.1/node_modules/shiki/themes/github-dark.json"],
 	}),
 });
