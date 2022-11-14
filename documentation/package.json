@@ -18,6 +18,7 @@
 		"@types/react-dom": "*",
 		"astro": "1.6.7",
 		"react": "*",
-		"react-dom": "*"
+		"react-dom": "*",
+		"rollup": "3.3.0"
 	}
 }
