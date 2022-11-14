@@ -20,7 +20,7 @@ importers:
 
   documentation:
     specifiers:
-      '@astrojs/mdx': ^0.11.6
+      '@astrojs/mdx': 0.11.6
       '@astrojs/react': 1.2.2
       '@astrojs/vercel': 2.3.3
       '@types/react': '*'
@@ -28,9 +28,9 @@ importers:
       astro: 1.6.7
       react: '*'
       react-dom: '*'
-      shiki: 0.11.1
+      rollup: 3.3.0
     dependencies:
-      '@astrojs/mdx': 0.11.6
+      '@astrojs/mdx': 0.11.6_rollup@3.3.0
       '@astrojs/react': 1.2.2_gqczyrwmhlwpr6z64d3xh3wv54
       '@astrojs/vercel': 2.3.3
       '@types/react': 18.0.25
@@ -38,7 +38,7 @@ importers:
       astro: 1.6.7
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      shiki: 0.11.1
+      rollup: 3.3.0
 
 packages:
 
@@ -103,13 +103,13 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/mdx/0.11.6:
+  /@astrojs/mdx/0.11.6_rollup@3.3.0:
     resolution: {integrity: sha512-MEi8CZuz4vXn74/jCb0CMOAKEqd6nsLrShYfE+ddb1//14CwuaVGbXN7V6/zGj8ZvBhFk/darBbNpJBmzfbI6A==}
     engines: {node: ^14.18.0 || >=16.12.0}
     dependencies:
       '@astrojs/prism': 1.0.2
       '@mdx-js/mdx': 2.1.5
-      '@mdx-js/rollup': 2.1.5
+      '@mdx-js/rollup': 2.1.5_rollup@3.3.0
       acorn: 8.8.1
       es-module-lexer: 0.10.5
       estree-util-visit: 1.2.0
@@ -555,13 +555,14 @@ packages:
       - supports-color
     dev: false
 
-  /@mdx-js/rollup/2.1.5:
+  /@mdx-js/rollup/2.1.5_rollup@3.3.0:
     resolution: {integrity: sha512-l90rSiwnEf6PnjH8uRXjZ1W0rR8p1fp1YIiDuA3uF7SOfxMQ98uymaIwI6BsX+8BC2dcWij7Racwp++JkvdOLQ==}
     peerDependencies:
       rollup: '>=2'
     dependencies:
       '@mdx-js/mdx': 2.1.5
       '@rollup/pluginutils': 4.2.1
+      rollup: 3.3.0
       source-map: 0.7.4
       vfile: 5.3.5
     transitivePeerDependencies:
@@ -3737,7 +3738,6 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
-    dev: true
 
   /run-parallel/1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}

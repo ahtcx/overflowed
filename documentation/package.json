@@ -1,5 +1,5 @@
 {
-	"name": "overflowed-documentation",
+	"name": "@overflowed/overflowed-documentation",
 	"type": "module",
 	"version": "0.0.0",
 	"private": true,
@@ -11,7 +11,7 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "^0.11.6",
+		"@astrojs/mdx": "0.11.6",
 		"@astrojs/react": "1.2.2",
 		"@astrojs/vercel": "2.3.3",
 		"@types/react": "*",
@@ -19,6 +19,6 @@
 		"astro": "1.6.7",
 		"react": "*",
 		"react-dom": "*",
-		"shiki": "0.11.1"
+		"rollup": "3.3.0"
 	}
 }
