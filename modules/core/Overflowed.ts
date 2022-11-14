@@ -16,7 +16,7 @@ export class Overflowed {
 	private containerElement?: Element | undefined;
 	private indicatorElement?: Element | undefined;
 
-	private disableIndicatorResizeProtection;
+	// private disableIndicatorResizeProtection;
 	private indicatorSize?: number;
 
 	constructor({
@@ -42,7 +42,7 @@ export class Overflowed {
 
 		this.direction = direction;
 		this.onUpdate = onUpdate;
-		this.disableIndicatorResizeProtection = disableIndicatorResizeProtection;
+		// this.disableIndicatorResizeProtection = disableIndicatorResizeProtection;
 	}
 
 	public registerContainerElement(containerElement: Element) {

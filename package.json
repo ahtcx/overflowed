@@ -1,8 +1,7 @@
 {
 	"name": "overflowed",
 	"type": "module",
-	"version": "0.0.0",
-	"private": true,
+	"version": "0.0.0-experimental-4e9f815",
 	"exports": {
 		"./core": "./dist/core/index.js",
 		"./react": "./dist/react/index.js"

@@ -9,7 +9,7 @@ export type CreateGetItemProps<F extends (...a: any[]) => {}> = (
 ) => F;
 
 export interface DefaultCreateGetItemPropsOptions {
-	style?: React.CSSProperties;
+	style?: Record<string, any>;
 }
 
 export const defaultCreateGetItemProps = ((isHidden, overflowed, state) =>
@@ -28,6 +28,6 @@ export const defaultCreateGetItemProps = ((isHidden, overflowed, state) =>
 				  }
 				: {}),
 			...style,
-		} satisfies React.CSSProperties,
+		} as const,
 		"aria-hidden": isHidden ? true : false,
 	})) satisfies CreateGetItemProps<any>;

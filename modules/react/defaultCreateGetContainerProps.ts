@@ -8,7 +8,7 @@ export type CreateGetContainerProps<F extends (...a: any[]) => {}> = (
 ) => F;
 
 export interface DefaultCreateGetContainerProps {
-	style?: React.CSSProperties;
+	style?: Record<string, any>;
 }
 
 export const defaultCreateGetContainerProps = ((overflowed, state) =>
@@ -23,5 +23,5 @@ export const defaultCreateGetContainerProps = ((overflowed, state) =>
 			flexDirection: overflowed.direction === "horizontal" ? "row" : "column",
 			overflowInline: state.isMounted ? "clip" : "auto",
 			...style,
-		} satisfies React.CSSProperties,
+		} as const,
 	})) satisfies CreateGetContainerProps<any>;

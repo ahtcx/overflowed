@@ -9,7 +9,7 @@ export type CreateGetIndicatorProps<F extends (...a: any[]) => {}> = (
 ) => F;
 
 export interface DefaultCreateGetIndicatorPropsOptions {
-	style?: React.CSSProperties
+	style?: Record<string, any>
 }
 
 export const defaultCreateGetIndicatorProps = (( overflowed, state, is) => ({ style }: DefaultCreateGetIndicatorPropsOptions = {}) => ({
@@ -21,5 +21,5 @@ export const defaultCreateGetIndicatorProps = (( overflowed, state, is) => ({ st
 		position: is ? "absolute" : undefined,
 		marginInlineStart: is ? state.indicatorElementOffset : undefined,
 		...style,
-	} satisfies React.CSSProperties,
+	} as const,
 })) satisfies CreateGetIndicatorProps<any>;
