@@ -35,6 +35,8 @@ export class Overflowed {
 							console.warn("width doesn't match", this.indicatorSize, entry.target.clientWidth);
 
 						this.indicatorSize = entry.target.clientWidth;
+					} else if (entry.target.parentNode === this.containerElement) {
+						console.log(entry.target);
 					}
 				}
 				this.requestUpdate();

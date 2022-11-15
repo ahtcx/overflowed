@@ -8,21 +8,27 @@ import { defaultCreateGetItemProps } from "./defaultCreateGetItemProps";
 
 export interface UseOverflowedItemsState {
 	visibleItemCount: number;
-	indicatorElementOffset: number;
+	indicatorElementOffset: number | undefined;
 	isMounted: boolean;
 }
 
 export interface UseOverflowedItemsOptions extends Omit<OverflowedOptions, "onUpdate"> {
 	enableEmptyOverflowedItems?: boolean;
+	maxItemCount?: number;
 }
 
 export const useOverflowedItems = <Item extends any>(
 	items: Item[],
-	{ enableEmptyOverflowedItems, ...options }: UseOverflowedItemsOptions = {},
+	{
+		//
+		enableEmptyOverflowedItems,
+		maxItemCount = items.length,
+		...options
+	}: UseOverflowedItemsOptions = {},
 ) => {
 	const [state, setState] = useState<UseOverflowedItemsState>({
-		visibleItemCount: items.length,
-		indicatorElementOffset: 0,
+		visibleItemCount: maxItemCount,
+		indicatorElementOffset: undefined,
 		isMounted: false,
 	});
 
@@ -32,7 +38,7 @@ export const useOverflowedItems = <Item extends any>(
 			onUpdate: (newVisibleItemCount, newIndicatorElementOffset) =>
 				setState(({ isMounted }) => ({
 					isMounted,
-					visibleItemCount: newVisibleItemCount,
+					visibleItemCount: Math.min(newVisibleItemCount, maxItemCount),
 					indicatorElementOffset: newIndicatorElementOffset,
 				})),
 		}),
@@ -49,17 +55,16 @@ export const useOverflowedItems = <Item extends any>(
 				getProps: defaultCreateGetItemProps(index >= state.visibleItemCount, overflowedRef.current, state),
 				item,
 			})),
-		[items, state.visibleItemCount],
+		[items, state],
 	);
 
 	// TODO: type this depending on options
 	const overflowedItems = useMemo(
 		() =>
-			state.visibleItemCount < items.length
-				? items.slice(state.visibleItemCount)
-				: enableEmptyOverflowedItems
-				? []
-				: undefined,
+			// prettier-ignore
+			state.visibleItemCount < items.length ? items.slice(state.visibleItemCount) :
+			enableEmptyOverflowedItems ? [] :
+			undefined,
 		[state.visibleItemCount, enableEmptyOverflowedItems],
 	);
 

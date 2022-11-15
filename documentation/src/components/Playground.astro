@@ -1,7 +1,6 @@
 ---
 import { Code } from "astro/components";
-import { Test } from "./Test";
-import Hello from "./Hello.svelte";
+import { Resizable } from "./Resizable";
 
 export interface Props {
 	children: any;
@@ -15,12 +14,9 @@ const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
 ---
 
 <div class="container">
-	<div class="sandbox">
+	<Resizable className="sandbox" client:load>
 		<slot />
-		<Test>
-			<Hello />
-		</Test>
-	</div>
+	</Resizable>
 	{
 		source && (
 			<details>
@@ -34,9 +30,6 @@ const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
 		)
 	}
 </div>
-<script>
-	console.log("hey");
-</script>
 <style>
 	:root {
 		--bg-color: hsl(0, 0%, 0%);

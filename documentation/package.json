@@ -18,6 +18,7 @@
 		"@types/react": "*",
 		"@types/react-dom": "*",
 		"astro": "1.6.7",
+		"re-resizable": "^6.9.9",
 		"react": "*",
 		"react-dom": "*",
 		"rollup": "3.3.0",

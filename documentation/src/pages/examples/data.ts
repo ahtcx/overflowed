@@ -7,11 +7,11 @@ export const people = [
 	"Anne-Sophie H",
 	"Alexandre H",
 	"Hannah S",
-	"Alan G",
-	"Nathalie H",
-	"Michael H",
-	"Anne-Sophie H",
-	"Anne-Sophie H",
+	// "Alan G",
+	// "Nathalie H",
+	// "Michael H",
+	// "Anne-Sophie H",
+	// "Anne-Sophie H",
 ].map((name, index) => ({
 	id: index,
 	initials: name
