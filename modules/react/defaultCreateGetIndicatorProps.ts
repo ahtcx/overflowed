@@ -19,7 +19,8 @@ export const defaultCreateGetIndicatorProps = (( overflowed, state, is) => ({ st
 	},
 	style: {
 		position: is ? "absolute" : undefined,
-		marginInlineStart: is ? state.indicatorElementOffset : undefined,
+		insetInlineStart: is ? state.indicatorElementOffset : undefined,
+		margin: 0,
 		...style,
 	} as const,
 })) satisfies CreateGetIndicatorProps<any>;

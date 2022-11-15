@@ -76,16 +76,54 @@ export class Overflowed {
 		this.indicatorElement = undefined;
 	}
 
-	// private previousChildOffsets = [0, 0];
-	private update() {
-		if (!this.containerElement) return; // throw new Error("TODO 3");
+	private breakpoints = [0, 0] as [number, number];
+	private updateBreakpoints() {
+		if (!this.containerElement) return;
 
 		const containerElementSize =
 			this.direction === "horizontal" ? this.containerElement.clientWidth : this.containerElement.clientHeight;
 		const indicatorElementSize =
 			(this.direction === "horizontal" ? this.indicatorElement?.clientWidth : this.indicatorElement?.clientHeight) ?? 0;
 
-		// todo: r these 3 decls valid? can i do bettr?????!!!!
+		const isRtl = getComputedStyle(this.containerElement).direction === "rtl";
+		const childrenArray = Array.from(this.containerElement.children) as HTMLElement[];
+
+		let mark = false;
+		for (const [index, child] of childrenArray.entries()) {
+			const childSize = this.direction === "horizontal" ? child.clientWidth : child.clientHeight;
+			const childOffset =
+				this.direction === "horizontal"
+					? isRtl
+						? containerElementSize - childSize - child.offsetLeft
+						: child.offsetLeft
+					: child.offsetTop;
+
+			if (mark) {
+				this.breakpoints[1] = childOffset + childSize + indicatorElementSize;
+				break;
+			}
+
+			if (childOffset + childSize >= containerElementSize - indicatorElementSize) {
+				this.breakpoints[0] = childOffset;
+				mark = true;
+			}
+		}
+
+		console.log(this.breakpoints);
+	}
+
+	// private previousChildOffsets = [0, 0];
+	private update() {
+		if (!this.containerElement) return; // throw new Error("TODO 3");
+
+		this.updateBreakpoints();
+
+		const containerElementSize =
+			this.direction === "horizontal" ? this.containerElement.clientWidth : this.containerElement.clientHeight;
+		const indicatorElementSize =
+			(this.direction === "horizontal" ? this.indicatorElement?.clientWidth : this.indicatorElement?.clientHeight) ?? 0;
+
+		// todo: r these 2 decls valid? can i do bettr?????!!!!
 		const isRtl = getComputedStyle(this.containerElement).direction === "rtl";
 		const childrenArray = Array.from(this.containerElement.children) as HTMLElement[];
 
