@@ -5,12 +5,12 @@ export const people = [
 	"Nathalie H",
 	"Michael H",
 	"Anne-Sophie H",
-	//
 	"Alexandre H",
 	"Hannah S",
 	"Alan G",
 	"Nathalie H",
 	"Michael H",
+	"Anne-Sophie H",
 	"Anne-Sophie H",
 ].map((name, index) => ({
 	id: index,

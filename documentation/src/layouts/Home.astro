@@ -10,7 +10,7 @@ const { frontmatter } = Astro.props;
 
 <Layout title={frontmatter.title}>
 	<main>
-		<h1>{frontmatter.title}</h1>
+		<h1 class="text-gradient">{frontmatter.title}</h1>
 		<slot />
 	</main>
 </Layout>
@@ -19,5 +19,19 @@ const { frontmatter } = Astro.props;
 	main {
 		max-width: 60ch;
 		margin: auto;
+	}
+
+	h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		margin: 0;
+	}
+
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
 	}
 </style>

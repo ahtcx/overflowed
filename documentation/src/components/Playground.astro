@@ -1,7 +1,7 @@
 ---
 import { Code } from "astro/components";
-import lang from "shiki/languages/tsx.tmLanguage.json";
-import theme from "shiki/themes/github-dark.json";
+import { Test } from "./Test";
+import Hello from "./Hello.svelte";
 
 export interface Props {
 	children: any;
@@ -12,18 +12,14 @@ const { source } = Astro.props;
 
 const DOCS_HIDDEN_REGEX = /\/\/\s?@docs-hidden\n(.*)\n/g;
 const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
-
-// TODO: https://github.com/withastro/astro/issues/5357
-// console.log(lang);
-// console.log(theme);
 ---
 
 <div class="container">
-	<label><input class="is-rtl" type="checkbox" /> RTL</label>
-	<div class="sandbox-wrapper">
-		<div class="sandbox">
-			<slot />
-		</div>
+	<div class="sandbox">
+		<slot />
+		<Test>
+			<Hello />
+		</Test>
 	</div>
 	{
 		source && (
@@ -38,6 +34,9 @@ const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
 		)
 	}
 </div>
+<script>
+	console.log("hey");
+</script>
 <style>
 	:root {
 		--bg-color: hsl(0, 0%, 0%);
@@ -49,7 +48,7 @@ const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
 		--thin-interval: 8px;
 	}
 
-	.sandbox-wrapper {
+	.sandbox {
 		position: relative;
 
 		border-radius: 8px;
@@ -67,13 +66,6 @@ const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
 				#0000 0
 			);
 		background-size: var(--thick-interval) var(--thick-interval), var(--thin-interval) var(--thin-interval);
-		background-position: 16px 16px;
-	}
-
-	.sandbox {
-		padding: 16px;
-		resize: both;
-		max-width: 100%;
-		overflow: hidden;
+		background-position: 8px 8px;
 	}
 </style>

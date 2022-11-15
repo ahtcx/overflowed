@@ -43,4 +43,4 @@ export default () => {
 };
 ```
 
-Visit the [React documentation](./react) for more comprehensive examples and documentation.
+Visit the [examples](./examples) to see it in action.
