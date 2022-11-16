@@ -15,7 +15,7 @@ export const AvatarExample = () => {
 					{item.initials}
 				</div>
 			))}
-			<div className="avatar" {...getIndicatorProps()}>
+			<div className="avatar long" {...getIndicatorProps()}>
 				+{overflowedPeople.length}
 			</div>
 		</div>

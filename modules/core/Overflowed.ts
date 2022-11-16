@@ -162,13 +162,15 @@ export class Overflowed {
 		// 	return b > containerElementSize;
 		// });
 
-		const foundIndex = newBreakpoints.findIndex(
-			([start, end]) => end > containerElementSize, //- indicatorElementSize,
-		);
+		const containerIntersectingChildIndex = newBreakpoints.findIndex(([start, end]) => end > containerElementSize); // - indicatorElementSize);
 
-		if (foundIndex !== -1) {
-			const visibleItemCount = foundIndex - 1;
-			const offsetIndex = foundIndex - 1;
+		if (containerIntersectingChildIndex !== -1) {
+			console.log({ containerIntersectingChildIndex });
+			const b = newBreakpoints.findIndex(([start, end]) => start > containerElementSize - indicatorElementSize) - 1;
+			console.log({ b });
+
+			const visibleItemCount = b;
+			const offsetIndex = b;
 			const offset = newBreakpoints[offsetIndex]?.[0]! + offsetStart;
 
 			// console.log({  visibleItemCount, offset });
