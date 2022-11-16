@@ -141,9 +141,6 @@ export class Overflowed {
 
 		const getOffset = isRtl ? this.getElementOffsetRtlFromRight.bind(this) : this.getElementOffsetFromLeft.bind(this);
 
-		// let lowerBreakpoint: number | undefined;
-		// let upperBreakpoint: number | undefined;
-
 		const newBreakpoints: Breakpoint[] = [];
 
 		for (const [_index, childElement] of childrenArray.entries()) {
@@ -153,31 +150,19 @@ export class Overflowed {
 			newBreakpoints.push([childOffset, childOffset + childSize]);
 		}
 
-		// const intersectingIndex = newBreakpoints.findIndex((b, index) => {
-		// 	// if (index === newBreakpoints.length - 1) {
-		// 	// 	// console.log({ b, containerElementSize });
-		// 	// 	return true;
-		// 	// }
-
-		// 	return b > containerElementSize;
-		// });
-
-		const containerIntersectingChildIndex = newBreakpoints.findIndex(([start, end]) => end > containerElementSize); // - indicatorElementSize);
+		const containerIntersectingChildIndex = newBreakpoints.findIndex(([_start, end]) => end > containerElementSize); // - indicatorElementSize);
 
 		if (containerIntersectingChildIndex !== -1) {
-			console.log({ containerIntersectingChildIndex });
-			const b = newBreakpoints.findIndex(([start, end]) => start > containerElementSize - indicatorElementSize) - 1;
-			console.log({ b });
+			const newVisibleItemCount = Math.max(
+				newBreakpoints.findIndex(([start]) => start > containerElementSize - indicatorElementSize) - 1,
+				0,
+			);
 
-			const visibleItemCount = b;
-			const offsetIndex = b;
-			const offset = newBreakpoints[offsetIndex]?.[0]! + offsetStart;
+			const newIndicatorElementOffset = newBreakpoints[newVisibleItemCount]?.[0]! + offsetStart;
 
-			// console.log({  visibleItemCount, offset });
-			this.onUpdate(visibleItemCount, offset);
+			this.onUpdate(newVisibleItemCount, newIndicatorElementOffset);
 		} else {
 			this.onUpdate(newBreakpoints.length, 0);
-			// console.log("yeah");
 		}
 	}
 
@@ -188,35 +173,6 @@ export class Overflowed {
 		}
 
 		this.updateBreakpoints();
-
-		// const containerElementSize =
-		// 	this.direction === "horizontal" ? this.containerElement.clientWidth : this.containerElement.clientHeight;
-		// const indicatorElementSize =
-		// 	(this.direction === "horizontal" ? this.indicatorElement?.clientWidth : this.indicatorElement?.clientHeight) ?? 0;
-
-		// // todo: r these 2 decls valid? can i do bettr?????!!!!
-		// const isRtl = getComputedStyle(this.containerElement).direction === "rtl";
-		// const childrenArray = Array.from(this.containerElement.children) as HTMLElement[];
-
-		// for (const [index, child] of childrenArray.entries()) {
-		// 	const childSize = this.direction === "horizontal" ? child.offsetWidth : child.offsetHeight;
-		// 	const childOffset =
-		// 		this.direction === "horizontal"
-		// 			? isRtl
-		// 				? containerElementSize - childSize - child.offsetLeft
-		// 				: child.offsetLeft
-		// 			: child.offsetTop;
-
-		// 	if (childOffset + childSize - 8 > containerElementSize - indicatorElementSize) {
-		// 		// const first = this.previousChildOffsets.shift();
-		// 		// this.previousChildOffsets.push(childOffset);
-		// 		// if (first !== childOffset)
-		// 		this.onUpdate(index, childOffset);
-		// 		return;
-		// 	}
-		// }
-
-		// this.onUpdate(childrenArray.length, 0);
 	}
 
 	private requestedUpdate = false;
