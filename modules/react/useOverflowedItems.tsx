@@ -52,7 +52,7 @@ export const useOverflowedItems = <Item extends any>(
 	const visibleItems = useMemo(
 		() =>
 			items.map((item, index) => ({
-				getProps: defaultCreateGetItemProps(index >= state.visibleItemCount, overflowedRef.current, state),
+				getProps: defaultCreateGetItemProps(overflowedRef.current, state, index >= state.visibleItemCount),
 				item,
 			})),
 		[items, state],
@@ -60,18 +60,14 @@ export const useOverflowedItems = <Item extends any>(
 
 	// TODO: type this depending on options
 	const overflowedItems = useMemo(
-		() =>
-			// prettier-ignore
-			state.visibleItemCount < items.length ? items.slice(state.visibleItemCount) :
-			enableEmptyOverflowedItems ? [] :
-			undefined,
+		() => (state.visibleItemCount < items.length ? items.slice(state.visibleItemCount) : []),
 		[state.visibleItemCount, enableEmptyOverflowedItems],
 	);
 
 	const props = useMemo(
 		() => ({
 			getContainerProps: defaultCreateGetContainerProps(overflowedRef.current, state),
-			getIndicatorProps: defaultCreateGetIndicatorProps(overflowedRef.current, state, Boolean(overflowedItems?.length)),
+			getIndicatorProps: defaultCreateGetIndicatorProps(overflowedRef.current, state, overflowedItems.length > 0),
 		}),
 		[state, overflowedItems],
 	);

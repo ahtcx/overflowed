@@ -13,9 +13,12 @@ export interface DefaultCreateGetContainerProps {
 
 export const defaultCreateGetContainerProps = ((overflowed, state) =>
 	({ style }: DefaultCreateGetContainerProps = {}) => ({
-		ref: <ContainerElement extends Element | null>(ContainerElement: ContainerElement) => {
-			if (!ContainerElement) return;
-			overflowed.registerContainerElement(ContainerElement);
+		ref: <ContainerElement extends Element | null>(containerElement: ContainerElement) => {
+			if (!(containerElement instanceof HTMLElement)) {
+				return;
+			}
+
+			overflowed.registerContainerElement(containerElement);
 		},
 		style: {
 			display: "flex",
@@ -24,4 +27,4 @@ export const defaultCreateGetContainerProps = ((overflowed, state) =>
 			overflowInline: state.isMounted ? "clip" : "auto",
 			...style,
 		} as const,
-	})) satisfies CreateGetContainerProps<any>;
+	})) as CreateGetContainerProps<any>;

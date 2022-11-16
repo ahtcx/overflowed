@@ -9,17 +9,15 @@ export const AvatarExample = () => {
 	const [visiblePeople, overflowedPeople, { getContainerProps, getIndicatorProps }] = useOverflowedItems(people);
 
 	return (
-		<div className="container" {...getContainerProps()}>
+		<div className="container" {...getContainerProps()} dir="ltr">
 			{visiblePeople.map(({ item, getProps }) => (
 				<div key={item.id} className="avatar" {...getProps({ style: { backgroundColor: item.color } })}>
 					{item.initials}
 				</div>
 			))}
-			{overflowedPeople && (
-				<div className="avatar" {...getIndicatorProps()}>
-					+{overflowedPeople.length}
-				</div>
-			)}
+			<div className="avatar" {...getIndicatorProps()}>
+				+{overflowedPeople.length}
+			</div>
 		</div>
 	);
 };
