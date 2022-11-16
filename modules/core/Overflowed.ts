@@ -115,8 +115,9 @@ export class Overflowed {
 		return element.offsetTop;
 	}
 
-	private breakpoints: Breakpoint[] = [];
-	private updateBreakpoints() {
+	// TODO: optimize so breakpoints only get calculated when a element changes size and calculate
+	// positions based off of that. :)
+	private update() {
 		if (!this.containerElement) {
 			return;
 		}
@@ -132,8 +133,8 @@ export class Overflowed {
 		const indicatorElementSize = this.getElementSize(this.indicatorElement);
 
 		const childrenArray = Array.from(this.containerElement.children)
-			.filter(isHtmlElement)
-			.filter((element) => element !== this.indicatorElement);
+			.filter((element) => element !== this.indicatorElement)
+			.filter(isHtmlElement);
 
 		if (childrenArray.length === 0) {
 			throw new Error("length shouldn't be zero, or nah?");
@@ -141,38 +142,27 @@ export class Overflowed {
 
 		const getOffset = isRtl ? this.getElementOffsetRtlFromRight.bind(this) : this.getElementOffsetFromLeft.bind(this);
 
-		const newBreakpoints: Breakpoint[] = [];
-
+		const breakpoints: Breakpoint[] = [];
 		for (const [_index, childElement] of childrenArray.entries()) {
 			const childOffset = getOffset(childElement) - offsetStart;
 			const childSize = this.getElementSize(childElement);
 
-			newBreakpoints.push([childOffset, childOffset + childSize]);
+			breakpoints.push([childOffset, childOffset + childSize]);
 		}
 
-		const containerIntersectingChildIndex = newBreakpoints.findIndex(([_start, end]) => end > containerElementSize); // - indicatorElementSize);
-
+		const containerIntersectingChildIndex = breakpoints.findIndex(([_start, end]) => end > containerElementSize);
 		if (containerIntersectingChildIndex !== -1) {
-			const newVisibleItemCount = Math.max(
-				newBreakpoints.findIndex(([start]) => start > containerElementSize - indicatorElementSize) - 1,
-				0,
+			const intersectingChildIndex = breakpoints.findIndex(
+				([start, end]) => (this.indicatorElement ? start : end) > containerElementSize - indicatorElementSize,
 			);
 
-			const newIndicatorElementOffset = newBreakpoints[newVisibleItemCount]?.[0]! + offsetStart;
+			const newVisibleItemCount = Math.max(intersectingChildIndex - (this.indicatorElement ? 1 : 0), 0);
+			const newIndicatorElementOffset = breakpoints[newVisibleItemCount]?.[0]! + offsetStart;
 
 			this.onUpdate(newVisibleItemCount, newIndicatorElementOffset);
 		} else {
-			this.onUpdate(newBreakpoints.length, 0);
+			this.onUpdate(breakpoints.length, 0);
 		}
-	}
-
-	// private previousChildOffsets = [0, 0];
-	private update() {
-		if (!this.containerElement) {
-			return; // throw new Error("TODO 3");
-		}
-
-		this.updateBreakpoints();
 	}
 
 	private requestedUpdate = false;

@@ -17,10 +17,5 @@
 }
 
 .avatar:not(:first-of-type) {
-	margin-inline-start: 16px;
-}
-
-.long {
-	width: 128px;
-	opacity: 0.5;
+	margin-inline-start: -16px;
 }
