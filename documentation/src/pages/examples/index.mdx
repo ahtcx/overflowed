@@ -7,9 +7,16 @@ import Playground from "../../components/Playground.astro";
 
 ## Avatar groups
 
-import { AvatarExample } from "./AvatarExample.tsx";
-import avatarExampleSource from "./AvatarExample.tsx?raw";
+import { AvatarExample as AvatarExampleReact } from "./AvatarExample.tsx";
+import avatarExampleReactSource from "./AvatarExample.tsx?raw";
 
-<Playground source={avatarExampleSource}>
-	<AvatarExample client:load />
+<Playground source={avatarExampleReactSource} lang="tsx">
+	<AvatarExampleReact client:load />
+</Playground>
+
+import AvatarExampleSvelte from "./AvatarExample.svelte";
+import avatarExampleSvelteSource from "./AvatarExample.svelte?raw";
+
+<Playground lang="svelte">
+	<AvatarExampleSvelte client:load />
 </Playground>

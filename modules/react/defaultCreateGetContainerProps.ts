@@ -21,11 +21,11 @@ export const defaultCreateGetContainerProps = ((overflowed, state) =>
 			overflowed.registerContainerElement(containerElement);
 		},
 		style: {
-			display: "flex",
-			position: "relative",
-			flexDirection: overflowed.direction === "horizontal" ? "row" : "column",
-			overflowX: overflowed.direction === "horizontal" ? (state.isMounted ? "clip" : "auto") : undefined,
-			overflowY: overflowed.direction === "horizontal" ? (state.isMounted ? "clip" : "auto") : undefined,
+			// display: "flex",
+			// position: "relative",
+			// flexDirection: overflowed.direction === "horizontal" ? "row" : "column",
+			overflowX: overflowed.axis === "horizontal" ? (state.isMounted ? "clip" : "auto") : undefined,
+			overflowY: overflowed.axis === "horizontal" ? (state.isMounted ? "clip" : "auto") : undefined,
 			...style,
 		} as const,
 	})) as CreateGetContainerProps<any>;

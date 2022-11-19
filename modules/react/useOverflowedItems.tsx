@@ -51,10 +51,10 @@ export const useOverflowedItems = <Item extends any>(
 
 	const visibleItems = useMemo(
 		() =>
-			items.map((item, index) => ({
-				getItemProps: defaultCreateGetItemProps(overflowedRef.current, state, index >= state.visibleItemCount),
-				item,
-			})),
+			items.map(
+				(item, index) =>
+					[item, defaultCreateGetItemProps(overflowedRef.current, state, index >= state.visibleItemCount)] as const,
+			),
 		[items, state],
 	);
 

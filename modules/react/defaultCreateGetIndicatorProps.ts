@@ -32,6 +32,5 @@ export const defaultCreateGetIndicatorProps = ((overflowed, state, isVisible) =>
 					userSelect: "none",
 					pointerEvents: "none",
 					visibility: "hidden",
-					flexShrink: 0,
 			  },
 	})) as CreateGetIndicatorProps<any>;

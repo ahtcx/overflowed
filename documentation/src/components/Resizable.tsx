@@ -1,16 +1,27 @@
+import { DragHandleHorizontalIcon, DragHandleVerticalIcon } from "@radix-ui/react-icons";
+import clsx from "clsx";
 import { Resizable as ReResizable, ResizableProps as ReResizableProps } from "re-resizable";
 import { useEffect, useState } from "react";
 
-import "./Resizable.css";
+import styles from "./Resizable.module.css";
 
 export interface ResizableProps extends ReResizableProps {
 	children?: React.ReactNode;
-	direction?: "horizontal" | "vertical";
+	axis?: "horizontal" | "vertical";
 }
 
-const VerticalHandle = (props: any) => <div className="vertical" {...props} />;
+const HorizontalHandle = (props: any) => (
+	<div className={clsx(styles["handle"], styles["horizontal"])} {...props}>
+		<DragHandleHorizontalIcon />
+	</div>
+);
+const VerticalHandle = (props: any) => (
+	<div className={clsx(styles["handle"], styles["vertical"])} {...props}>
+		<DragHandleVerticalIcon />
+	</div>
+);
 
-export const Resizable = ({ children, direction = "horizontal", ...props }: ResizableProps) => {
+export const Resizable = ({ children, axis = "horizontal", ...props }: ResizableProps) => {
 	const [isMounted, setIsMounted] = useState(false);
 
 	useEffect(() => {
@@ -20,8 +31,8 @@ export const Resizable = ({ children, direction = "horizontal", ...props }: Resi
 	return (
 		<ReResizable
 			{...props}
-			handleComponent={{ right: <VerticalHandle /> }}
-			enable={{ right: direction === "horizontal" && isMounted }}
+			handleComponent={{ right: <VerticalHandle />, bottom: <HorizontalHandle /> }}
+			enable={{ right: axis === "horizontal" && isMounted, bottom: axis === "vertical" && isMounted }}
 			maxWidth="100%"
 		>
 			{children}

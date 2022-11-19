@@ -1,20 +1,23 @@
 ---
 import { Code } from "astro/components";
 import { Resizable } from "./Resizable";
+import prettier from "prettier/standalone";
+import babylon from "prettier/parser-babel";
 
 export interface Props {
 	children: any;
+	lang: string;
 	source?: string;
 }
 
-const { source } = Astro.props;
+const { lang, source } = Astro.props;
 
-const DOCS_HIDDEN_REGEX = /\/\/\s?@docs-hidden\n(.*)\n/g;
-const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
+const DOCS_HIDDEN_REGEX = /\/\/\s?@docs-line-hidden\n(.*)\n/g;
+const TWO_MANY_NEWLINE_REGEX = /(\n(\s+)?){2,}\n/g;
 ---
 
 <div class="container">
-	<Resizable className="sandbox" direction="horizontal" client:load>
+	<Resizable className="sandbox" axis="horizontal" client:load>
 		<slot />
 	</Resizable>
 	{
@@ -22,8 +25,12 @@ const TWO_MANY_NEWLINE_REGEX = /\n{2,}/g;
 			<details>
 				<summary>Source code</summary>
 				<Code
-					code={source.replace(DOCS_HIDDEN_REGEX, "").replace(TWO_MANY_NEWLINE_REGEX, "\n\n")}
-					lang="tsx"
+					code={prettier.format(source.replace(DOCS_HIDDEN_REGEX, "").replace(TWO_MANY_NEWLINE_REGEX, "\n\n"), {
+						parser: "babel",
+						plugins: [babylon],
+						printWidth: 120,
+					})}
+					lang={lang}
 					theme="github-dark"
 				/>
 			</details>

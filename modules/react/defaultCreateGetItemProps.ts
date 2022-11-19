@@ -22,7 +22,6 @@ export const defaultCreateGetItemProps = ((overflowed, state, isHidden) =>
 			overflowed.registerItemElement(itemElement);
 		},
 		style: {
-			flexShrink: 0,
 			...(isHidden
 				? ({
 						userSelect: "none",

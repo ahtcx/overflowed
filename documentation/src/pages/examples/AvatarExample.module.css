@@ -1,19 +1,22 @@
 .container {
+	display: flex;
+	flex-direction: row;
+	list-style: none;
 	padding: 8px;
+	margin: 0;
 }
 
 .avatar {
+	display: inline-grid;
+	place-content: center;
 	background-color: gray;
-	padding: 8px;
 	border-radius: 50%;
 	box-shadow: 0 0 0 2px #fff;
 	width: 64px;
 	height: 64px;
 	box-sizing: border-box;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	font-size: 1.5rem;
+	flex-shrink: 0;
 }
 
 .avatar:not(:first-of-type) {

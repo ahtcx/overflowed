@@ -1,23 +1,36 @@
 import { useOverflowedItems } from "overflowed/react";
 
-// @docs-hidden
-import "./AvatarExample.css";
-// @docs-hidden
+// @docs-line-hidden
+import styles from "./AvatarExample.module.css";
+// @docs-line-hidden
 import { people } from "./data";
 
 export const AvatarExample = () => {
 	const [visiblePeople, overflowedPeople, { getContainerProps, getIndicatorProps }] = useOverflowedItems(people);
 
 	return (
-		<div className="container" {...getContainerProps()}>
-			{visiblePeople.map(({ item, getItemProps }) => (
-				<div key={item.id} className="avatar" {...getItemProps({ style: { backgroundColor: item.color } })}>
-					{item.initials}
-				</div>
+		<ul
+			// @docs-line-hidden
+			className={styles["container"]}
+			{...getContainerProps()}
+		>
+			{visiblePeople.map(([person, getItemProps]) => (
+				<li
+					key={person.id}
+					// @docs-line-hidden
+					className={styles["avatar"]}
+					{...getItemProps({ style: { backgroundColor: person.color } })}
+				>
+					{person.initials}
+				</li>
 			))}
-			<div className="avatar" {...getIndicatorProps()}>
+			<li
+				// @docs-line-hidden
+				className={styles["avatar"]}
+				{...getIndicatorProps()}
+			>
 				+{overflowedPeople.length}
-			</div>
-		</div>
+			</li>
+		</ul>
 	);
 };

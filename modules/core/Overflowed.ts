@@ -1,32 +1,31 @@
 export interface OverflowedOptions {
-	direction?: "horizontal" | "vertical";
+	axis?: "horizontal" | "vertical";
 	onUpdate: (visibleItemCount: number, indicatorElementOffset: number) => void;
 	disableIndicatorResizeProtection?: boolean;
 
 	ResizeObserver?: typeof ResizeObserver;
 }
 
-export type Breakpoint = [minimumSize: number, maximumSize: number];
+export type Breakpoint = [lowerBound: number, upperBound: number];
 
 export class Overflowed {
-	public readonly direction;
+	public readonly axis;
 
 	private onUpdate;
 
 	private resizeObserver: ResizeObserver | undefined;
 
-	private containerElement?: HTMLElement | undefined;
-	private indicatorElement?: HTMLElement | undefined;
+	private containerElement: HTMLElement | null = null;
+	private indicatorElement: HTMLElement | null = null;
 
 	// private disableIndicatorResizeProtection;
 	private indicatorSize?: number;
 
 	constructor({
 		ResizeObserver = typeof window === "undefined" ? undefined : window.ResizeObserver,
-		//
-		direction = "horizontal",
+		axis = "horizontal",
 		onUpdate,
-		disableIndicatorResizeProtection,
+		// disableIndicatorResizeProtection,
 	}: OverflowedOptions) {
 		this.resizeObserver =
 			ResizeObserver &&
@@ -45,7 +44,7 @@ export class Overflowed {
 				this.requestUpdate();
 			});
 
-		this.direction = direction;
+		this.axis = axis;
 		this.onUpdate = onUpdate;
 		// this.disableIndicatorResizeProtection = disableIndicatorResizeProtection;
 	}
@@ -75,8 +74,8 @@ export class Overflowed {
 	public onContainerElementWillUnmount() {
 		this.resizeObserver?.disconnect();
 
-		this.containerElement = undefined;
-		this.indicatorElement = undefined;
+		this.containerElement = null;
+		this.indicatorElement = null;
 	}
 
 	private getElementSize(element?: HTMLElement | null) {
@@ -84,19 +83,19 @@ export class Overflowed {
 			return 0;
 		}
 
-		if (this.direction === "horizontal") {
+		if (this.axis === "horizontal") {
 			return element.offsetWidth;
 		}
 
 		return element.offsetHeight;
 	}
 
-	private getElementOffsetRtlFromRight(element?: HTMLElement) {
+	private getElementOffsetFromRight(element?: HTMLElement) {
 		if (!element) {
 			return 0;
 		}
 
-		if (this.direction === "horizontal") {
+		if (this.axis === "horizontal") {
 			return this.getElementSize(element.parentElement) - this.getElementSize(element) - element.offsetLeft;
 		}
 
@@ -108,7 +107,7 @@ export class Overflowed {
 			return 0;
 		}
 
-		if (this.direction === "horizontal") {
+		if (this.axis === "horizontal") {
 			return element.offsetLeft;
 		}
 
@@ -122,12 +121,13 @@ export class Overflowed {
 			return;
 		}
 
-		const containerComputedStyles = window.getComputedStyle(this.containerElement);
+		const { direction, paddingBlockStart, paddingBlockEnd, paddingInlineStart, paddingInlineEnd } =
+			window.getComputedStyle(this.containerElement);
 
-		const offsetStart = parseInt(containerComputedStyles.paddingInlineStart, 10);
-		const offsetEnd = parseInt(containerComputedStyles.paddingInlineEnd, 10);
+		const offsetStart = parseInt(this.axis === "horizontal" ? paddingInlineStart : paddingBlockStart, 10);
+		const offsetEnd = parseInt(this.axis === "horizontal" ? paddingInlineEnd : paddingBlockEnd, 10);
 
-		const isRtl = containerComputedStyles.direction === "rtl";
+		const isRtl = direction === "rtl";
 
 		const containerElementSize = this.getElementSize(this.containerElement) - offsetStart - offsetEnd;
 		const indicatorElementSize = this.getElementSize(this.indicatorElement);
@@ -136,18 +136,18 @@ export class Overflowed {
 			.filter((element) => element !== this.indicatorElement)
 			.filter(isHtmlElement);
 
-		if (childrenArray.length === 0) {
-			throw new Error("length shouldn't be zero, or nah?");
-		}
-
-		const getOffset = isRtl ? this.getElementOffsetRtlFromRight.bind(this) : this.getElementOffsetFromLeft.bind(this);
+		const getOffset = isRtl ? this.getElementOffsetFromRight.bind(this) : this.getElementOffsetFromLeft.bind(this);
 
 		const breakpoints: Breakpoint[] = [];
 		for (const [_index, childElement] of childrenArray.entries()) {
-			const childOffset = getOffset(childElement) - offsetStart;
+			const childOffset = getOffset(childElement);
 			const childSize = this.getElementSize(childElement);
 
-			breakpoints.push([childOffset, childOffset + childSize]);
+			breakpoints.push([childOffset - offsetStart, childOffset + childSize + offsetEnd]);
+		}
+
+		if (breakpoints.length === 0) {
+			return;
 		}
 
 		const containerIntersectingChildIndex = breakpoints.findIndex(([_start, end]) => end > containerElementSize);
@@ -184,5 +184,5 @@ const isHtmlElement = (element: Element): element is HTMLElement => {
 		return true;
 	}
 
-	throw new Error("NOPE 1");
+	throw new Error("Element provided is not a HTMLElement.");
 };
