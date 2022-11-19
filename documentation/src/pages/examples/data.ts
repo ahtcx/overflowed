@@ -28,3 +28,22 @@ export const people = [
 	name,
 	color: `hsl(${index * 100}, 50%, 50%)`,
 }));
+
+export const links = [
+	"Home",
+	"World",
+	"Politics",
+	"Business",
+	"Opinion",
+	"Science",
+	"Health",
+	"Sports",
+	"Arts",
+	"Books",
+	"Style",
+	"Food",
+	"Travel",
+].map((title, index) => ({
+	id: index,
+	title,
+}));

@@ -25,7 +25,7 @@ export const defaultCreateGetIndicatorProps = ((overflowed, state, isVisible) =>
 			? {
 					position: isVisible ? "absolute" : undefined,
 					insetInlineStart: isVisible ? state.indicatorElementOffset : undefined,
-					margin: 0,
+					marginInlineStart: 0,
 					...style,
 			  }
 			: {

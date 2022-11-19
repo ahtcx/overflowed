@@ -1,0 +1,15 @@
+.container {
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 1.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 8px;
+	white-space: nowrap;
+}
+
+.container > li {
+	display: inline-block;
+	margin: 8px;
+	cursor: pointer;
+	text-decoration: underline;
+}

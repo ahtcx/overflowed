@@ -7,6 +7,8 @@ import Playground from "../../components/Playground.astro";
 
 ## Avatar groups
 
+In this example a group of user avatars is displayed.
+
 import { AvatarExample as AvatarExampleReact } from "./AvatarExample.tsx";
 import avatarExampleReactSource from "./AvatarExample.tsx?raw";
 
@@ -14,9 +16,13 @@ import avatarExampleReactSource from "./AvatarExample.tsx?raw";
 	<AvatarExampleReact client:load />
 </Playground>
 
-import AvatarExampleSvelte from "./AvatarExample.svelte";
-import avatarExampleSvelteSource from "./AvatarExample.svelte?raw";
+## Navigation bar
 
-<Playground lang="svelte">
-	<AvatarExampleSvelte client:load />
+In this example the navigation bar has too many items to fit on a single line, so we add the overflowing options into a dropdown menu.
+
+import { NavigationExample as NavigationExampleReact } from "./NavigationExample.tsx";
+import navigationExampleReactSource from "./NavigationExample.tsx?raw";
+
+<Playground source={navigationExampleReactSource} lang="tsx">
+	<NavigationExampleReact client:load />
 </Playground>
