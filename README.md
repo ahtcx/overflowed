@@ -11,7 +11,7 @@ Overflowed is a small library allowing you to build better responsive websites. 
 - ♿ Encourages accessible practices
 - ↩️ Supports right-to-left writing modes
 - 🦄 Ponyfills can be provided
-- ⚙️ Falls back nicely when rendered SSR
+- ⚙️ Supports SSR and environments without JS
 - 🧩 Ships with ESM and CJS bundles
 
 ## Installation
@@ -21,6 +21,19 @@ npm install overflowed
 yarn add overflowed
 pnpm add overflowed
 ```
+
+## Progress
+
+- [ ] Documentation
+  - [ ] Getting started
+  - [ ] Examples
+  - [ ] Playground
+- [ ] `overflowed/core`
+- [ ] `overflowed/react`
+- [ ] `overflowed/vue`
+- [ ] `overflowed/svelte`
+- [ ] `overflowed/preact`
+- [ ] `overflowed/solid`
 
 ## Usage
 

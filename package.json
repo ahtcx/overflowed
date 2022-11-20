@@ -1,22 +1,9 @@
 {
 	"name": "overflowed",
-	"type": "module",
-	"version": "0.0.0-experimental",
-	"exports": {
-		"./core": {
-			"import": "./dist/core/index.js",
-			"require": "./dist/core/index.cjs"
-		},
-		"./react": {
-			"import": "./dist/react/index.js",
-			"require": "./dist/react/index.cjs"
-		},
-		"./svelte": {
-			"import": "./dist/svelte/index.js",
-			"require": "./dist/svelte/index.cjs"
-		}
-	},
-	"types": "./dist/index.d.ts",
+	"version": "0.0.0-experimental-20221120013127",
+	"main": "./index.js",
+	"module": "./index.mjs",
+	"types": "./index.d.ts",
 	"scripts": {
 		"build": "tsup",
 		"dev": "pnpm --recursive dev"
