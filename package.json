@@ -1,11 +1,20 @@
 {
 	"name": "overflowed",
 	"type": "module",
-	"version": "0.0.0-experimental-e38322b",
+	"version": "0.0.0-experimental",
 	"exports": {
-		"./core": "./dist/core/index.js",
-		"./react": "./dist/react/index.js",
-		"./svelte": "./dist/svelte/index.js"
+		"./core": {
+			"import": "./dist/core/index.js",
+			"require": "./dist/core/index.cjs"
+		},
+		"./react": {
+			"import": "./dist/react/index.js",
+			"require": "./dist/react/index.cjs"
+		},
+		"./svelte": {
+			"import": "./dist/svelte/index.js",
+			"require": "./dist/svelte/index.cjs"
+		}
 	},
 	"types": "./dist/index.d.ts",
 	"scripts": {
@@ -13,6 +22,7 @@
 		"dev": "pnpm --recursive dev"
 	},
 	"devDependencies": {
+		"@changesets/cli": "2.25.2",
 		"@types/react": "18.0.25",
 		"@types/react-dom": "18.0.9",
 		"react": "18.2.0",
@@ -24,6 +34,18 @@
 	},
 	"peerDependencies": {
 		"@types/react": "^17.0.0 || ^18.0.0",
-		"react": "^17.0.0 || ^18.0.0"
+		"react": "^17.0.0 || ^18.0.0",
+		"svelte": "^3.0.0"
+	},
+	"peerDependenciesMeta": {
+		"@types/react": {
+			"optional": true
+		},
+		"react": {
+			"optional": true
+		},
+		"svelte": {
+			"optional": true
+		}
 	}
 }
