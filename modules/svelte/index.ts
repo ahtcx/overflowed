@@ -1,1 +1,1 @@
-export * from "./OverflowedActions";
+export * from "./overflowedItems";

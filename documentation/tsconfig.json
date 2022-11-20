@@ -3,8 +3,8 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"overflowed/*": ["../modules/*"],
-			"~/*": ["./src/*"]
+			"~/*": ["./src/*"],
+			"overflowed/*": ["../modules/*"]
 		}
 	},
 	"exclude": ["./dist"]

@@ -26,12 +26,19 @@ pnpm add overflowed
 
 - [ ] Documentation
   - [ ] Getting started
+    - [ ] React
+    - [ ] Vue.js
+    - [ ] Svelte
+    - [ ] Preact
+    - [ ] SolidJS
   - [ ] Examples
   - [ ] Playground
 - [ ] `overflowed/core`
 - [ ] `overflowed/react`
+  - [ ] `useOverflowedItems`
 - [ ] `overflowed/vue`
 - [ ] `overflowed/svelte`
+  - [ ] `overflowedItems`
 - [ ] `overflowed/preact`
 - [ ] `overflowed/solid`
 

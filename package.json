@@ -1,6 +1,11 @@
 {
 	"name": "overflowed",
 	"version": "0.0.0-experimental-20221120013127",
+	"description": "Create toolbars with responsive overflow menus ✂️",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ahtcx/overflowed.git"
+	},
 	"main": "./index.js",
 	"module": "./index.mjs",
 	"types": "./index.d.ts",
@@ -12,6 +17,7 @@
 		"@changesets/cli": "2.25.2",
 		"@types/react": "18.0.25",
 		"@types/react-dom": "18.0.9",
+		"preact": "10.11.3",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"rome": "10.0.1",
@@ -21,11 +27,15 @@
 	},
 	"peerDependencies": {
 		"@types/react": "^17.0.0 || ^18.0.0",
+		"preact": "^10.0.0",
 		"react": "^17.0.0 || ^18.0.0",
 		"svelte": "^3.0.0"
 	},
 	"peerDependenciesMeta": {
 		"@types/react": {
+			"optional": true
+		},
+		"preact": {
 			"optional": true
 		},
 		"react": {

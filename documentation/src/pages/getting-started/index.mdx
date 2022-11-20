@@ -1,24 +1,32 @@
 ---
+title: Getting Started
 layout: ~/layouts/Documentation.astro
 ---
-
-# Getting Started
 
 ## Installation
 
 Add the package to your project.
 
-```shell
-npm install overflowed
-```
+import PackageManagerTabs from "../../components/tabs/PackageManagerTabs.astro";
 
-```shell
-yarn add overflowed
-```
+<PackageManagerTabs>
+	<Fragment slot="npm">
+	```shell
+	npm install overflowed
+	```
+	</Fragment>
+	<Fragment slot="pnpm">
+	```shell
+	pnpm add overflowed
+	```
+	</Fragment>
+	<Fragment slot="yarn">
+	```shell
+	yarn add overflowed
+	```
+	</Fragment>
 
-```shell
-pnpm add overflowed
-```
+</PackageManagerTabs>
 
 ## Usage
 
@@ -29,6 +37,6 @@ Overflowed is used in different ways depending on your chosen framework. Below a
 - [Svelte](/getting-started/svelte)
 - [Preact](/getting-started/preact)
 - [SolidJS](/getting-started/solid-js)
-- [Core (Vanilla JS)](/getting-started/core)
+- [Vanilla JS](/getting-started/vanilla)
 
 If your framework isn't here feel free to create a [new issue](https://github.com/ahtcx/overflowed/issues) or add a thumbs up if an issue already exists.

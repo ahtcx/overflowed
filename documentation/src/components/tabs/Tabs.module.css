@@ -1,0 +1,16 @@
+.tab {
+	background-color: transparent;
+	border: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.tab[data-state='active'] {
+	outline: 1px solid #fff;
+}
+
+.tab img {
+	width: 16px;
+	height: 16px;
+}

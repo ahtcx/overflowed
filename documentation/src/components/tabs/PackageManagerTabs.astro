@@ -1,0 +1,25 @@
+---
+import { Tabs } from "./Tabs";
+---
+
+<Tabs client:load sharedStore="package-managers">
+	<Fragment slot="tab.npm">
+		<img src="/assets/npm_icon.svg" /> npm
+	</Fragment>
+	<Fragment slot="tab.pnpm">
+		<img src="/assets/pnpm_icon.svg" /> pnpm
+	</Fragment>
+	<Fragment slot="tab.yarn">
+		<img src="/assets/yarn_icon.svg" /> Yarn
+	</Fragment>
+
+	<Fragment slot="panel.npm">
+		<slot name="npm" />
+	</Fragment>
+	<Fragment slot="panel.pnpm">
+		<slot name="pnpm" />
+	</Fragment>
+	<Fragment slot="panel.yarn">
+		<slot name="yarn" />
+	</Fragment>
+</Tabs>

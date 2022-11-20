@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro";
+import Navigation from "./Navigation.astro";
 
 import type { MarkdownLayoutProps } from "astro";
 type Props = MarkdownLayoutProps<{
@@ -9,15 +10,25 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-	<main>
-		<h1>{frontmatter.title}</h1>
-		<slot />
-	</main>
+	<div class="wrapper">
+		<Navigation />
+		<main>
+			<h1>{frontmatter.title}</h1>
+			<slot />
+		</main>
+	</div>
 </Layout>
 
 <style>
+	@media (min-width: 100ch) {
+		.wrapper {
+			display: grid;
+			grid-template-areas: "navigation main";
+			grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+		}
+	}
+
 	main {
 		max-width: 60ch;
-		margin: auto;
 	}
 </style>
