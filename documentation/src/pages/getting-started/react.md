@@ -2,23 +2,9 @@
 layout: ~/layouts/Documentation.astro
 ---
 
-# Getting Started
+# Getting Started with React
 
-## Installation
-
-Add the package to your project.
-
-```shell
-npm install overflowed
-```
-
-```shell
-yarn add overflowed
-```
-
-```shell
-pnpm add overflowed
-```
+This is a guide on using Overflowed's React hooks, if you're not using React your can visit the [getting started guides](/getting-started) for other frameworks.
 
 ## React
 
