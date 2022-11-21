@@ -38,8 +38,15 @@ export const Tabs = ({ sharedStore, ...slots }: TabsProps) => {
 		setIsMounted(true);
 	}, []);
 
-	const tabs = Object.entries(slots).filter(isTabSlotEntry);
-	const panels = Object.entries(slots).filter(isPanelSlotEntry);
+	const slotEntries = Object.entries(slots).sort(([keyA], [keyB]) => {
+		const indexA = parseInt(getBaseKeyFromPanel(keyA), 10);
+		const indexB = parseInt(getBaseKeyFromPanel(keyB), 10);
+
+		return indexA - indexB;
+	});
+
+	const tabs = slotEntries.filter(isTabSlotEntry);
+	const panels = slotEntries.filter(isPanelSlotEntry);
 
 	const firstPanelKey = panels[0]?.[0];
 
@@ -49,7 +56,7 @@ export const Tabs = ({ sharedStore, ...slots }: TabsProps) => {
 		return (
 			<>
 				{panels.map(([key, content], index) => (
-					<details key={getBaseKeyFromPanel(key)} open={index === 0}>
+					<details className={styles["details"]} key={getBaseKeyFromPanel(key)} open={index === 0}>
 						<summary className={styles["tab"]}>{tabs[index]![1]}</summary>
 						{content}
 					</details>
@@ -60,7 +67,7 @@ export const Tabs = ({ sharedStore, ...slots }: TabsProps) => {
 
 	return (
 		<TabsRadix.Root value={value} onValueChange={(newValue) => setValue(newValue)}>
-			<TabsRadix.List>
+			<TabsRadix.List className={styles["tabs"]}>
 				{tabs.map(([key, content]) => (
 					<TabsRadix.Trigger key={key} className={styles["tab"]} value={getBaseKeyFromPanel(key)}>
 						{content}

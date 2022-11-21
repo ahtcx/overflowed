@@ -29,4 +29,4 @@ export default () => {
 };
 ```
 
-Visit the [examples](./examples) to see it in action.
+Visit the [examples](/examples) to see it in action.

@@ -1,16 +1,8 @@
-import { atom, map } from 'nanostores';
+import {  persistentMap } from "@nanostores/persistent";
 
 type TabStore = {
-	[key: string]: {
-		curr: string;
-	};
+	[key: string]: string;
 };
 
-export const tabId = atom<number>(0);
-export const tabStore = map<TabStore>({});
+export const tabStore = persistentMap<TabStore>("tabStore", {});
 
-export function genTabId() {
-	const id = tabId.get();
-	tabId.set(id + 1);
-	return id;
-}

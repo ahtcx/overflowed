@@ -3,23 +3,23 @@ import { Tabs } from "./Tabs";
 ---
 
 <Tabs client:load sharedStore="package-managers">
-	<Fragment slot="tab.npm">
+	<Fragment slot="tab.0npm">
 		<img src="/assets/npm_icon.svg" /> npm
 	</Fragment>
-	<Fragment slot="tab.pnpm">
+	<Fragment slot="tab.1pnpm">
 		<img src="/assets/pnpm_icon.svg" /> pnpm
 	</Fragment>
-	<Fragment slot="tab.yarn">
+	<Fragment slot="tab.2yarn">
 		<img src="/assets/yarn_icon.svg" /> Yarn
 	</Fragment>
 
-	<Fragment slot="panel.npm">
+	<Fragment slot="panel.0npm">
 		<slot name="npm" />
 	</Fragment>
-	<Fragment slot="panel.pnpm">
+	<Fragment slot="panel.1pnpm">
 		<slot name="pnpm" />
 	</Fragment>
-	<Fragment slot="panel.yarn">
+	<Fragment slot="panel.2yarn">
 		<slot name="yarn" />
 	</Fragment>
 </Tabs>

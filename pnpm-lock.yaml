@@ -33,6 +33,7 @@ importers:
       '@astrojs/react': 1.2.2
       '@astrojs/svelte': 1.0.2
       '@astrojs/vercel': 2.3.4
+      '@nanostores/persistent': 0.7.0
       '@nanostores/react': 0.4.0
       '@radix-ui/react-icons': ^1.1.1
       '@radix-ui/react-tabs': 1.0.1
@@ -58,6 +59,7 @@ importers:
       '@astrojs/react': 1.2.2_cn3ejhfta5lq2dae4xucvtkwvu
       '@astrojs/svelte': 1.0.2_4rgu74t2n5aihruqie6ni6rao4
       '@astrojs/vercel': 2.3.4
+      '@nanostores/persistent': 0.7.0_nanostores@0.7.1
       '@nanostores/react': 0.4.0_l7qgfzs3f7fslbs5zoobn4ovy4
       '@radix-ui/react-icons': 1.1.1_react@18.2.0
       '@radix-ui/react-tabs': 1.0.1_biqbaboplfbrettd7655fr4n2y
@@ -857,6 +859,15 @@ packages:
       vfile: 5.3.6
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@nanostores/persistent/0.7.0_nanostores@0.7.1:
+    resolution: {integrity: sha512-4PAInL/T1hbftZUJ0cmgdFHBMalUoq7BUXFBy7QfyMv/8X3LPTYNh/yxspL7+J+XM3UNvVI7IFRMMs6FBasjhQ==}
+    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      nanostores: ^0.7.0
+    dependencies:
+      nanostores: 0.7.1
     dev: false
 
   /@nanostores/react/0.4.0_l7qgfzs3f7fslbs5zoobn4ovy4:
