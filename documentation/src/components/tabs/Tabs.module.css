@@ -5,6 +5,7 @@
 }
 
 .tab {
+	all: unset;
 	background-color: transparent;
 	font-size: 1rem;
 	border: none;
@@ -22,4 +23,25 @@
 .tab img {
 	width: 16px;
 	height: 16px;
+}
+
+.details:not(:first-of-type) {
+	animation: appear 1s;
+}
+
+@media (prefers-reduced-motion) {
+	.details {
+		animation: none;
+	}
+}
+
+@keyframes appear {
+	from, 99.99% {
+		position: absolute;
+		opacity: 0;
+	}
+	to {
+		position: initial;
+		opacity: 1;
+	}
 }
