@@ -16,6 +16,11 @@
 	border-bottom: 2px solid transparent;
 }
 
+button.tab {
+	/* -webkit-appearance: none; */
+	appearance: none;
+}
+
 .tab[data-state=active] {
 	border-bottom: 2px solid white;
 }
