@@ -14,10 +14,11 @@
 	align-items: center;
 	gap: 8px;
 	cursor: default;
+	border-bottom: 1px solid transparent;
 }
 
-.tab[data-state='active'] {
-	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+.tab[data-state=active] {
+	border-bottom: 1px solid white;
 }
 
 .tab img {
@@ -25,7 +26,12 @@
 	height: 16px;
 }
 
-.details:not(:first-of-type) {
+summary.tab::marker, 
+summary.tab::-webkit-details-marker {
+	display: none;
+}
+
+.details:not([open]) {
 	animation: appear 1s;
 }
 
@@ -38,10 +44,12 @@
 @keyframes appear {
 	from, 99.99% {
 		position: absolute;
+		visibility: hidden;
 		opacity: 0;
 	}
 	to {
 		position: initial;
+		visibility: visible;
 		opacity: 1;
 	}
 }
