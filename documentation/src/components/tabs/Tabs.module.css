@@ -5,7 +5,6 @@
 }
 
 .tab {
-	all: unset;
 	background-color: transparent;
 	font-size: 1rem;
 	border: none;
@@ -14,11 +13,11 @@
 	align-items: center;
 	gap: 8px;
 	cursor: default;
-	border-bottom: 1px solid transparent;
+	border-bottom: 2px solid transparent;
 }
 
 .tab[data-state=active] {
-	border-bottom: 1px solid white;
+	border-bottom: 2px solid white;
 }
 
 .tab img {

@@ -1,0 +1,77 @@
+---
+import { Tabs } from "./Tabs";
+---
+
+<Tabs client:load sharedStore="framework">
+	{
+		Astro.slots.has("react") && (
+			<Fragment slot="tab.0react">
+				<img src="/assets/react_icon.svg" /> React
+			</Fragment>
+		)
+	}
+	{
+		Astro.slots.has("vue") && (
+			<Fragment slot="tab.1vue">
+				<img src="/assets/vue_icon.svg" /> Vue.js
+			</Fragment>
+		)
+	}
+	{
+		Astro.slots.has("svelte") && (
+			<Fragment slot="tab.2svelte">
+				<img src="/assets/svelte_icon.svg" /> Svelte
+			</Fragment>
+		)
+	}
+	{
+		Astro.slots.has("preact") && (
+			<Fragment slot="tab.3preact">
+				<img src="/assets/react_icon.svg" /> Preact
+			</Fragment>
+		)
+	}
+	{
+		Astro.slots.has("solid") && (
+			<Fragment slot="tab.4solid">
+				<img src="/assets/react_icon.svg" /> SolidJS
+			</Fragment>
+		)
+	}
+
+	{
+		Astro.slots.has("react") && (
+			<Fragment slot="panel.0react">
+				<slot name="react" />
+			</Fragment>
+		)
+	}
+	{
+		Astro.slots.has("vue") && (
+			<Fragment slot="panel.1vue">
+				<slot name="vue" />
+			</Fragment>
+		)
+	}
+	{
+		Astro.slots.has("svelte") && (
+			<Fragment slot="panel.2svelte">
+				<slot name="svelte" />
+			</Fragment>
+		)
+	}
+	{
+		Astro.slots.has("preact") && (
+			<Fragment slot="panel.3preact">
+				<slot name="preact" />
+			</Fragment>
+		)
+	}
+	{
+		Astro.slots.has("solid") && (
+			<Fragment slot="panel.4solid">
+				<slot name="solid" />
+			</Fragment>
+		)
+	}
+</Tabs>
