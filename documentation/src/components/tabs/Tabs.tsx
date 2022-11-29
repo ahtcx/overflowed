@@ -1,6 +1,6 @@
 import * as TabsRadix from "@radix-ui/react-tabs";
 
-import { useEffect, useState } from "react";
+import { isValidElement, useEffect, useState } from "react";
 
 import { useTabState } from "./useTabState";
 
@@ -12,14 +12,18 @@ const panelSlotKey = "panel." as const;
 type TabSlot = `${typeof tabSlotKey}${string}`;
 type PanelSlot = `${typeof panelSlotKey}${string}`;
 
+interface NodeProps {
+	value: string;
+}
+
 function isTabSlotEntry(entry: [string, React.ReactNode]): entry is [TabSlot, React.ReactNode] {
-	const [key] = entry;
-	return key.startsWith(tabSlotKey);
+	const [key, node] = entry;
+	return key.startsWith(tabSlotKey) && isValidElement<NodeProps>(node) && !!node.props.value.toString();
 }
 
 function isPanelSlotEntry(entry: [string, React.ReactNode]): entry is [PanelSlot, React.ReactNode] {
-	const [key] = entry;
-	return key.startsWith(panelSlotKey);
+	const [key, node] = entry;
+	return key.startsWith(panelSlotKey) && isValidElement<NodeProps>(node) && !!node.props.value.toString();
 }
 
 function getBaseKeyFromPanel(slot: string = "") {

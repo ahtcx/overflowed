@@ -6,19 +6,15 @@
 
 .tab {
 	background-color: transparent;
-	font-size: 1rem;
+	color: inherit;
+	font-size: inherit;
 	border: none;
 	padding: 8px;
-	display: inline-flex;
+	display: flex;
 	align-items: center;
 	gap: 8px;
 	cursor: default;
 	border-bottom: 2px solid transparent;
-}
-
-button.tab {
-	-webkit-appearance: none;
-	/* appearance: none; */
 }
 
 .tab[data-state=active] {
@@ -35,7 +31,7 @@ summary.tab::-webkit-details-marker {
 	display: none;
 }
 
-.details:not([open]) {
+.details:not(:first-of-type) {
 	animation: appear 1s;
 }
 

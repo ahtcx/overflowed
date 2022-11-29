@@ -9,12 +9,18 @@ import Playground from "../../components/Playground.astro";
 
 In this example a group of user avatars is displayed.
 
+import FrameworkTabs from "../../components/tabs/FrameworkTabs.astro";
+
 import { AvatarExample as AvatarExampleReact } from "./AvatarExample.tsx";
 import avatarExampleReactSource from "./AvatarExample.tsx?raw";
 
-<Playground source={avatarExampleReactSource} lang="tsx">
-	<AvatarExampleReact client:load />
-</Playground>
+<FrameworkTabs>
+	<Playground source={avatarExampleReactSource} lang="tsx" slot="react">
+		<AvatarExampleReact client:load />
+	</Playground>
+	<Fragment slot="vue">hello world</Fragment>
+
+</FrameworkTabs>
 
 ## Navigation bar
 
