@@ -10,6 +10,7 @@
 	font-size: inherit;
 	border: none;
 	padding: 8px;
+	margin-inline-start: 8px;
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -17,8 +18,12 @@
 	border-bottom: 2px solid transparent;
 }
 
+button.tab:not(:first-of-type) {
+	margin-inline-start: 0;
+}
+
 .tab[data-state=active] {
-	border-bottom: 2px solid white;
+	border-bottom: 2px solid red;
 }
 
 .tab img {

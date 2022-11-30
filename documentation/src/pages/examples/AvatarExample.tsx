@@ -3,34 +3,49 @@ import { useOverflowedItems } from "overflowed/react";
 // @docs-line-hidden
 import styles from "./AvatarExample.module.css";
 // @docs-line-hidden
-import { people } from "./data";
+import { people as stargazers } from "./data";
 
 export const AvatarExample = () => {
-	const [visiblePeople, overflowedPeople, { getContainerProps, getIndicatorProps }] = useOverflowedItems(people);
+	const [visibleStargazers, overflowedStargazers, { getContainerProps, getIndicatorProps }] =
+		useOverflowedItems(stargazers);
 
 	return (
-		<ul
+		<div
 			// @docs-line-hidden
-			className={styles["container"]}
-			{...getContainerProps()}
+			className={styles["root"]}
 		>
-			{visiblePeople.map(([person, getItemProps]) => (
+			<h2>
+				Starred by{" "}
+				<span
+					// @docs-line-hidden
+					className={styles["counter"]}
+				>
+					{stargazers.length}
+				</span>
+			</h2>
+			<ul
+				// @docs-line-hidden
+				className={styles["container"]}
+				{...getContainerProps()}
+			>
+				{visibleStargazers.map(([stargazer, getItemProps]) => (
+					<li
+						key={stargazer.id}
+						// @docs-line-hidden
+						className={styles["avatar"]}
+						{...getItemProps({ style: { backgroundColor: stargazer.color } })}
+					>
+						{stargazer.initials}
+					</li>
+				))}
 				<li
-					key={person.id}
 					// @docs-line-hidden
 					className={styles["avatar"]}
-					{...getItemProps({ style: { backgroundColor: person.color } })}
+					{...getIndicatorProps()}
 				>
-					{person.initials}
+					+{overflowedStargazers.length}
 				</li>
-			))}
-			<li
-				// @docs-line-hidden
-				className={styles["avatar"]}
-				{...getIndicatorProps()}
-			>
-				+{overflowedPeople.length}
-			</li>
-		</ul>
+			</ul>
+		</div>
 	);
 };

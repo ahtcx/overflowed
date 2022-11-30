@@ -17,8 +17,10 @@ const TWO_MANY_NEWLINE_REGEX = /(\n(\s+)?){2,}\n/g;
 ---
 
 <div class="container">
-	<Resizable className="sandbox" axis="horizontal" client:load>
-		<slot />
+	<Resizable axis="horizontal" client:load>
+		<div class="sandbox">
+			<slot />
+		</div>
 	</Resizable>
 	{
 		source && (
@@ -52,7 +54,7 @@ const TWO_MANY_NEWLINE_REGEX = /(\n(\s+)?){2,}\n/g;
 		position: relative;
 
 		border-radius: 8px;
-		box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.15);
+		box-shadow: 0 0 0 2px hsla(0, 0%, 100%, 0.15);
 
 		background-color: var(--bg-color);
 		background-image: conic-gradient(
@@ -67,6 +69,8 @@ const TWO_MANY_NEWLINE_REGEX = /(\n(\s+)?){2,}\n/g;
 			);
 		background-size: var(--thick-interval) var(--thick-interval), var(--thin-interval) var(--thin-interval);
 		background-position: 8px 8px;
+
+		overflow: hidden;
 	}
 
 	.source {

@@ -3,13 +3,14 @@ title: Examples
 layout: ~/layouts/Documentation.astro
 ---
 
+import FrameworkTabs from "../../components/tabs/FrameworkTabs.astro";
 import Playground from "../../components/Playground.astro";
 
 ## Avatar groups
 
-In this example a group of user avatars is displayed.
-
-import FrameworkTabs from "../../components/tabs/FrameworkTabs.astro";
+This example shows a live list of GitHub stargazers as avatars. The end
+indicator shows how many avatars are currently hidden. Feel free to [add
+yourself 🥰](https://github.com/ahtcx/overflowed/stargazers).
 
 import { AvatarExample as AvatarExampleReact } from "./AvatarExample.tsx";
 import avatarExampleReactSource from "./AvatarExample.tsx?raw";

@@ -1,9 +1,29 @@
+.root {
+	background-color: #0d1117;
+	color: #c9d1d9;
+	padding: 8px;
+}
+
+.root > h2 {
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 0;
+}
+
+.root .counter {
+	background-color: rgba(110, 118, 129, 0.4);
+	font-weight: normal;
+	font-size: 12px;
+	border-radius: 2em;
+	padding: 0 6px;
+}
+
 .container {
 	display: flex;
 	flex-direction: row;
 	list-style: none;
-	padding: 8px;
 	margin: 0;
+	padding: 0;
 }
 
 .avatar {
@@ -12,13 +32,13 @@
 	background-color: gray;
 	border-radius: 50%;
 	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
-	width: 64px;
-	height: 64px;
+	width: 32px;
+	height: 32px;
 	box-sizing: border-box;
-	font-size: 1.5rem;
+	font-size: 1rem;
 	flex-shrink: 0;
 }
 
 .avatar:not(:first-of-type) {
-	margin-inline-start: -16px;
+	margin-inline-start: -8px;
 }
