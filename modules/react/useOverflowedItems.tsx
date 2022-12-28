@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Overflowed, OverflowedOptions } from "../core/Overflowed";
-import { defaultCreateGetContainerProps } from "./defaultCreateGetContainerProps";
 
+import { defaultCreateGetContainerProps } from "./defaultCreateGetContainerProps";
 import { defaultCreateGetIndicatorProps } from "./defaultCreateGetIndicatorProps";
 import { defaultCreateGetItemProps } from "./defaultCreateGetItemProps";
 
