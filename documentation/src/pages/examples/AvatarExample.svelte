@@ -6,19 +6,19 @@
 	// @docs-line-hidden
 	import { people } from "./data";
 
-	let [visiblePeople, overflowedPeople, actions] = overflowedItems(people, (newVisiblePeople, newOverflowedPeople) => {
+	let [visiblePeople, overflowedPeople, action] = overflowedItems(people, (newVisiblePeople, newOverflowedPeople) => {
 		visiblePeople = newVisiblePeople;
 		overflowedPeople = newOverflowedPeople;
 	});
 </script>
 
-<div class="container" use:actions.container>
+<div class="container" use:action.container>
 	{#each visiblePeople as person, index}
-		<div class="avatar" use:actions.item={index}>
+		<div class="avatar" use:action.item={index}>
 			{person.initials}
 		</div>
 	{/each}
-	<div class="avatar" use:actions.indicator>
+	<div class="avatar" use:action.indicator>
 		+{overflowedPeople.length}
 	</div>
 </div>
