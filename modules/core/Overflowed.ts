@@ -25,8 +25,8 @@ export class Overflowed {
 		ResizeObserver = typeof window === "undefined" ? undefined : window.ResizeObserver,
 		axis = "horizontal",
 		onUpdate,
-		// disableIndicatorResizeProtection,
-	}: OverflowedOptions) {
+	}: // disableIndicatorResizeProtection,
+	OverflowedOptions) {
 		this.resizeObserver =
 			ResizeObserver &&
 			new ResizeObserver((entries) => {
@@ -95,6 +95,7 @@ export class Overflowed {
 			return 0;
 		}
 
+		console.log(element.parentElement);
 		if (this.axis === "horizontal") {
 			return this.getElementSize(element.parentElement) - this.getElementSize(element) - element.offsetLeft;
 		}
@@ -124,8 +125,14 @@ export class Overflowed {
 		const { direction, paddingBlockStart, paddingBlockEnd, paddingInlineStart, paddingInlineEnd } =
 			window.getComputedStyle(this.containerElement);
 
-		const offsetStart = parseInt(this.axis === "horizontal" ? paddingInlineStart : paddingBlockStart, 10);
-		const offsetEnd = parseInt(this.axis === "horizontal" ? paddingInlineEnd : paddingBlockEnd, 10);
+		const offsetStartAsString = this.axis === "horizontal" ? paddingInlineStart : paddingBlockStart;
+		const offsetEndAsString = this.axis === "horizontal" ? paddingInlineEnd : paddingBlockEnd;
+
+		if (!offsetStartAsString.endsWith("px")) throw new Error("ok");
+		if (!offsetEndAsString.endsWith("px")) throw new Error("ok2");
+
+		const offsetStart = parseInt(offsetStartAsString, 10);
+		const offsetEnd = parseInt(offsetEndAsString, 10);
 
 		const isRtl = direction === "rtl";
 

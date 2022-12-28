@@ -10,17 +10,26 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-	<Navigation />
-	<main>
-		<h1 class="text-gradient">{frontmatter.title}</h1>
-		<slot />
-	</main>
+	<div class="wrapper">
+		<Navigation />
+		<main>
+			<h1 class="text-gradient">{frontmatter.title}</h1>
+			<slot />
+		</main>
+	</div>
 </Layout>
 
 <style>
-	main {
-		max-width: 60ch;
-		margin: auto;
+	@media (min-width: 100ch) {
+		.wrapper {
+			display: grid;
+			grid-template-areas: "navigation main";
+			grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+		}
+
+		main {
+			max-width: 80ch;
+		}
 	}
 
 	h1 {

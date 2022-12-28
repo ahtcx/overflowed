@@ -1,6 +1,8 @@
 # Overflowed
 
-Overflowed is a small library allowing you to build better responsive websites. It's currently in it's alpha stage and the APIs are potentially unstable, but I aim to satisfy the following goals before a stable version.
+Overflowed is a small library allowing you to make your websites more responsive with collapsible
+lists. It's currently in it's alpha stage and the APIs are potentially unstable, but I aim to
+satisfy the following goals before a stable version.
 
 - ⚛️ Works across all major frameworks
 - 🌳 Lightweight and dependency-free, tree-shakable
@@ -44,35 +46,5 @@ pnpm add overflowed
 
 ## Usage
 
-Check out the [examples](https://overflowed.aht.cx/examples) to see how to use the library with your preferred framework.
-
-<details>
-<summary>React</summary>
-
-```tsx
-import { useOverflowedItems } from "overflowed/react";
-
-export const AvatarExample = () => {
-	const [visiblePeople, overflowedPeople, { getContainerProps, getIndicatorProps }] = useOverflowedItems(people);
-
-	return (
-		<ul {...getContainerProps()}>
-			{visiblePeople.map(([person, getItemProps]) => (
-				<li key={person.id} {...getItemProps({ style: { backgroundColor: person.color } })}>
-					{person.initials}
-				</li>
-			))}
-			<li {...getIndicatorProps()}>+{overflowedPeople.length}</li>
-		</ul>
-	);
-};
-```
-
-</details>
-
-<details>
-<summary>Svelte</summary>
-
-WIP
-
-</details>
+Check out the [examples](https://overflowed.aht.cx/examples) to see the library being used in
+various scenarios and it's implementations.

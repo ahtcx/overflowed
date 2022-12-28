@@ -6,6 +6,9 @@ layout: ~/layouts/Documentation.astro
 import FrameworkTabs from "../../components/tabs/FrameworkTabs.astro";
 import Playground from "../../components/Playground.astro";
 
+This page contains various uses of Overflowed and it's implementation in each framework. You can
+resize the container by dragging the handle on the right side of each example.
+
 ## Avatar groups
 
 This example shows a live list of GitHub stargazers as avatars. The end
@@ -15,13 +18,9 @@ yourself 🥰](https://github.com/ahtcx/overflowed/stargazers).
 import { AvatarExample as AvatarExampleReact } from "./AvatarExample.tsx";
 import avatarExampleReactSource from "./AvatarExample.tsx?raw";
 
-<FrameworkTabs>
-	<Playground source={avatarExampleReactSource} lang="tsx" slot="react">
-		<AvatarExampleReact client:load />
-	</Playground>
-	<Fragment slot="vue">hello world</Fragment>
-
-</FrameworkTabs>
+<Playground source={avatarExampleReactSource} lang="tsx">
+	<AvatarExampleReact client:load />
+</Playground>
 
 ## Navigation bar
 
