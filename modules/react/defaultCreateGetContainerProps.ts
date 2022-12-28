@@ -26,6 +26,7 @@ export const defaultCreateGetContainerProps = ((overflowed, state) =>
 			// flexDirection: overflowed.direction === "horizontal" ? "row" : "column",
 			overflowX: overflowed.axis === "horizontal" ? (state.isMounted ? "clip" : "auto") : undefined,
 			overflowY: overflowed.axis === "horizontal" ? (state.isMounted ? "clip" : "auto") : undefined,
+			position: "relative",
 			...style,
 		} as const,
 	})) as CreateGetContainerProps<any>;
