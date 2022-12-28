@@ -21,14 +21,13 @@ export const defaultCreateGetIndicatorProps = ((overflowed, state, isVisible) =>
 
 			overflowed.registerIndicatorElement(indicatorElement);
 		},
-		style: isVisible
-			? {
-					position: isVisible ? "absolute" : undefined,
-					insetInlineStart: isVisible ? state.indicatorElementOffset : undefined,
-					marginInlineStart: 0,
-					...style,
-			  }
-			: {
-					display: "none",
-			  },
+		style: {
+			position: "absolute",
+			marginInlineStart: 0,
+			insetInlineStart: isVisible ? state.indicatorElementOffset : 0,
+			userSelect: isVisible ? undefined : "none",
+			pointerEvents: isVisible ? undefined : "none",
+			visibility: isVisible ? undefined : "hidden",
+			...style,
+		},
 	})) as CreateGetIndicatorProps<any>;

@@ -132,15 +132,15 @@ export class Overflowed {
 		const paddingStartAsString = this.axis === "horizontal" ? paddingInlineStart : paddingBlockStart;
 		const paddingEndAsString = this.axis === "horizontal" ? paddingInlineEnd : paddingBlockEnd;
 
-		if (!marginStartAsString.endsWith("px")) throw new Error("ok");
-		if (!marginEndAsString.endsWith("px")) throw new Error("ok2");
-		if (!paddingStartAsString.endsWith("px")) throw new Error("ok");
-		if (!paddingEndAsString.endsWith("px")) throw new Error("ok2");
+		if (marginStartAsString && !marginStartAsString.endsWith("px")) throw new Error("ok1");
+		if (marginEndAsString && !marginEndAsString.endsWith("px")) throw new Error("ok2");
+		if (paddingStartAsString && !paddingStartAsString.endsWith("px")) throw new Error("ok3");
+		if (paddingEndAsString && !paddingEndAsString.endsWith("px")) throw new Error("ok4");
 
-		const marginStart = parseInt(marginStartAsString, 10);
-		const marginEnd = parseInt(marginEndAsString, 10);
-		const paddingStart = parseInt(paddingStartAsString, 10);
-		const paddingEnd = parseInt(paddingEndAsString, 10);
+		const marginStart = parseInt(marginStartAsString || "0", 10);
+		const marginEnd = parseInt(marginEndAsString || "0", 10);
+		const paddingStart = parseInt(paddingStartAsString || "0", 10);
+		const paddingEnd = parseInt(paddingEndAsString || "0", 10);
 
 		const isRtl = direction === "rtl";
 
@@ -159,8 +159,9 @@ export class Overflowed {
 			paddingStart: containerPaddingStart,
 			paddingEnd: containerPaddingEnd,
 		} = this.getElementComputedValues(this.containerElement);
-		// TODO: not "!"
-		const { marginEnd: indicatorMarginEnd } = this.getElementComputedValues(this.indicatorElement!);
+		const indicatorMarginEnd = this.indicatorElement
+			? this.getElementComputedValues(this.indicatorElement).marginEnd
+			: 0;
 
 		const containerElementSize =
 			this.getElementSize(this.containerElement) - containerPaddingStart - containerPaddingEnd;

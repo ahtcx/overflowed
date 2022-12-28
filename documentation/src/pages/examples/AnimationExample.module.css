@@ -1,0 +1,68 @@
+@font-face {
+	font-family: LeagueMono;
+	src: url(/assets/fonts/LeagueMonoVariable.woff2) format('woff2');
+	font-weight: 100 900;
+	font-stretch: 50 200;
+}
+
+@keyframes letter-width {
+	0%, 100% {
+		font-variation-settings: "wdth" 50;
+	}	
+	50% {
+		font-variation-settings: "wdth" 200;
+	}
+}
+
+@keyframes letter-weight {
+	0%, 100% {
+		font-weight: 100;
+	}	
+	50% {
+		font-weight: 800;
+	}
+}
+
+@keyframes letter-hue {
+	0%, 100% {
+		filter: hue-rotate(0deg);
+	}	
+	25% {
+		filter: hue-rotate(90deg);
+	}
+	50% {
+		filter: hue-rotate(180deg);
+	}
+	75% {
+		filter: hue-rotate(270deg);
+	}
+}
+
+.root {
+	font-family: LeagueMono;
+	font-size: 72px;
+	display: flex;
+	flex-direction: row;
+	background-color: black;
+}
+
+.letter {
+	animation: letter-width infinite, letter-weight infinite, letter-hue infinite;
+	background-color: hsl(0, 50%, 50%);
+	color: hsl(0, 50%, 25%);
+	flex-shrink: 0;
+	line-height: 96px;
+}
+
+.letter:nth-of-type(2) {
+	padding: 0 16px;
+	filter: none !important;
+}
+
+.indicator {
+	aspect-ratio: 1 / 1;
+	height: 100%;
+	font-size: 32px;
+	line-height: 32px;
+	word-break: break-all;
+}

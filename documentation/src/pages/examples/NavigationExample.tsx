@@ -16,7 +16,13 @@ export const NavigationExample = () => {
 		>
 			{visibleLinks.map(([link, getProps]) => (
 				<li key={link.id} {...getProps()}>
-					{link.title}
+					<a
+						href={link.url}
+						// @docs-line-hidden
+						onClick={(event) => event.preventDefault()}
+					>
+						{link.title}
+					</a>
 				</li>
 			))}
 			<li {...getIndicatorProps()}>More</li>

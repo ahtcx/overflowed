@@ -1,4 +1,4 @@
-export const people = [
+export const stargazers = [
 	"Charmine Pleavin",
 	"Winfred Housby",
 	"Ethelbert Vignal",
@@ -66,4 +66,5 @@ export const links = [
 ].map((title, index) => ({
 	id: index,
 	title,
+	url: undefined,
 }));
