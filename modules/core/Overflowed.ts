@@ -114,7 +114,7 @@ export class Overflowed {
 		return element.offsetTop;
 	}
 
-	private test(element: HTMLElement) {
+	private getElementComputedValues(element: HTMLElement) {
 		const {
 			direction,
 			marginBlockStart,
@@ -127,24 +127,24 @@ export class Overflowed {
 			paddingInlineEnd,
 		} = window.getComputedStyle(element);
 
-		const marginOffsetStartAsString = this.axis === "horizontal" ? marginInlineStart : marginBlockStart;
-		const marginOffsetEndAsString = this.axis === "horizontal" ? marginInlineEnd : marginBlockEnd;
-		const paddingOffsetStartAsString = this.axis === "horizontal" ? paddingInlineStart : paddingBlockStart;
-		const paddingOffsetEndAsString = this.axis === "horizontal" ? paddingInlineEnd : paddingBlockEnd;
+		const marginStartAsString = this.axis === "horizontal" ? marginInlineStart : marginBlockStart;
+		const marginEndAsString = this.axis === "horizontal" ? marginInlineEnd : marginBlockEnd;
+		const paddingStartAsString = this.axis === "horizontal" ? paddingInlineStart : paddingBlockStart;
+		const paddingEndAsString = this.axis === "horizontal" ? paddingInlineEnd : paddingBlockEnd;
 
-		if (!marginOffsetStartAsString.endsWith("px")) throw new Error("ok");
-		if (!marginOffsetEndAsString.endsWith("px")) throw new Error("ok2");
-		if (!paddingOffsetStartAsString.endsWith("px")) throw new Error("ok");
-		if (!paddingOffsetEndAsString.endsWith("px")) throw new Error("ok2");
+		if (!marginStartAsString.endsWith("px")) throw new Error("ok");
+		if (!marginEndAsString.endsWith("px")) throw new Error("ok2");
+		if (!paddingStartAsString.endsWith("px")) throw new Error("ok");
+		if (!paddingEndAsString.endsWith("px")) throw new Error("ok2");
 
-		const marginOffsetStart = parseInt(marginOffsetStartAsString, 10);
-		const marginOffsetEnd = parseInt(marginOffsetEndAsString, 10);
-		const paddingOffsetStart = parseInt(paddingOffsetStartAsString, 10);
-		const paddingOffsetEnd = parseInt(paddingOffsetEndAsString, 10);
+		const marginStart = parseInt(marginStartAsString, 10);
+		const marginEnd = parseInt(marginEndAsString, 10);
+		const paddingStart = parseInt(paddingStartAsString, 10);
+		const paddingEnd = parseInt(paddingEndAsString, 10);
 
 		const isRtl = direction === "rtl";
 
-		return { isRtl, marginOffsetStart, marginOffsetEnd, paddingOffsetStart, paddingOffsetEnd };
+		return { isRtl, marginStart, marginEnd, paddingStart, paddingEnd };
 	}
 
 	// TODO: optimize so breakpoints only get calculated when a element changes size and calculate
@@ -156,15 +156,15 @@ export class Overflowed {
 
 		const {
 			isRtl,
-			paddingOffsetStart: containerPaddingOffsetStart,
-			paddingOffsetEnd: containerPaddingOffsetEnd,
-		} = this.test(this.containerElement);
+			paddingStart: containerPaddingStart,
+			paddingEnd: containerPaddingEnd,
+		} = this.getElementComputedValues(this.containerElement);
 		// TODO: not "!"
-		const { marginOffsetEnd } = this.test(this.indicatorElement!);
+		const { marginEnd: indicatorMarginEnd } = this.getElementComputedValues(this.indicatorElement!);
 
 		const containerElementSize =
-			this.getElementSize(this.containerElement) - containerPaddingOffsetStart - containerPaddingOffsetEnd;
-		const indicatorElementSize = this.getElementSize(this.indicatorElement) + marginOffsetEnd;
+			this.getElementSize(this.containerElement) - containerPaddingStart - containerPaddingEnd;
+		const indicatorElementSize = this.getElementSize(this.indicatorElement) + indicatorMarginEnd;
 
 		const childrenArray = Array.from(this.containerElement.children)
 			.filter((element) => element !== this.indicatorElement)
@@ -173,14 +173,11 @@ export class Overflowed {
 		const getOffset = isRtl ? this.getElementOffsetFromRight.bind(this) : this.getElementOffsetFromLeft.bind(this);
 
 		const breakpoints: Breakpoint[] = [];
-		for (const [_index, childElement] of childrenArray.entries()) {
+		for (const childElement of childrenArray.values()) {
 			const childOffset = getOffset(childElement);
 			const childSize = this.getElementSize(childElement);
 
-			breakpoints.push([
-				childOffset - containerPaddingOffsetStart,
-				childOffset + childSize + containerPaddingOffsetEnd,
-			]);
+			breakpoints.push([childOffset - containerPaddingStart, childOffset + childSize + containerPaddingEnd]);
 		}
 
 		if (breakpoints.length === 0) {
@@ -194,7 +191,7 @@ export class Overflowed {
 			);
 
 			const newVisibleItemCount = Math.max(intersectingChildIndex - (this.indicatorElement ? 1 : 0), 0);
-			const newIndicatorElementOffset = breakpoints[newVisibleItemCount]?.[0]! + containerPaddingOffsetStart;
+			const newIndicatorElementOffset = breakpoints[newVisibleItemCount]?.[0]! + containerPaddingStart;
 
 			this.onUpdate(newVisibleItemCount, newIndicatorElementOffset);
 		} else {
