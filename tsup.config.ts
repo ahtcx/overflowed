@@ -1,3 +1,4 @@
+import { copyFile } from "node:fs/promises";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
@@ -10,4 +11,10 @@ export default defineConfig({
 		},
 	},
 	format: ["cjs", "esm"],
+	onSuccess: async () => {
+		await Promise.allSettled([
+			copyFile("./package.json", "./dist/package.json"),
+			copyFile("./README.md", "./dist/README.md"),
+		]);
+	},
 });

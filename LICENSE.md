@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2022 Alexandre Hitchcox
+Copyright (c) 2023 Alexandre Hitchcox
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

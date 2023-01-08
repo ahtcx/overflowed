@@ -26,7 +26,7 @@ export const defaultCreateGetItemProps = ((overflowed, state, isHidden) =>
 				? ({
 						userSelect: "none",
 						pointerEvents: "none",
-						visibility: "hidden",
+						opacity: 0,
 				  } as const)
 				: {}),
 			...style,

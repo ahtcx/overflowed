@@ -38,14 +38,16 @@ import navigationExampleReactSource from "./NavigationExample.tsx?raw";
 This examples showcases items fading in/out and the indicator smoothly moving around. This is simply
 acheived with CSS and allows you write styling like you normally would.
 
+import { PlaylistExample as PlaylistExampleReact } from "./PlaylistExample.tsx";
+import playlistExampleReactSource from "./PlaylistExample.tsx?raw";
+
+<Playground source={playlistExampleReactSource} lang="tsx">
+	<PlaylistExampleReact client:load />
+</Playground>
+
 ## Animations
 
 This example demonstrates Overflowed's ability to adapt to lists with moving or animated elements.
 The letters are constantly resizing and the library is able to keep up with these changes at 60FPS.
 
-import { AnimationExample as AnimationExampleReact } from "./AnimationExample.tsx";
-import animationExampleReactSource from "./AnimationExample.tsx?raw";
-
-<Playground source={animationExampleReactSource} lang="tsx">
-	<AnimationExampleReact client:load />
-</Playground>
+TODO: improve performance

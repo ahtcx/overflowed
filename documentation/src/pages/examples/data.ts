@@ -68,3 +68,55 @@ export const links = [
 	title,
 	url: undefined,
 }));
+
+export const songs = [
+	{
+		title: "Dribble",
+		artist: "Sycco",
+		coverArt: "http://coverartarchive.org/release/a5c52496-512e-41fb-a282-686f64de4a34/front-250",
+	},
+	{
+		title: "Idontknow",
+		artist: "Jamie xx",
+		coverArt: "https://coverartarchive.org/release/5fcbbb7e-b1da-40ea-966d-597578507bc2/front-250",
+	},
+	{
+		title: "Rollin' & Scratchin'",
+		artist: "Daft Punk",
+		coverArt: "https://coverartarchive.org/release/770b9b80-10e1-4297-b1fd-46ad0dbb0305/front-250",
+	},
+	{
+		title: "Dribble",
+		artist: "Sycco",
+		coverArt: "http://coverartarchive.org/release/a5c52496-512e-41fb-a282-686f64de4a34/front-250",
+	},
+	{
+		title: "Idontknow",
+		artist: "Jamie xx",
+		coverArt: "https://coverartarchive.org/release/5fcbbb7e-b1da-40ea-966d-597578507bc2/front-250",
+	},
+	{
+		title: "Rollin' & Scratchin'",
+		artist: "Daft Punk",
+		coverArt: "https://coverartarchive.org/release/770b9b80-10e1-4297-b1fd-46ad0dbb0305/front-250",
+	},
+	{
+		title: "Dribble",
+		artist: "Sycco",
+		coverArt: "http://coverartarchive.org/release/a5c52496-512e-41fb-a282-686f64de4a34/front-250",
+	},
+	{
+		title: "Idontknow",
+		artist: "Jamie xx",
+		coverArt: "https://coverartarchive.org/release/5fcbbb7e-b1da-40ea-966d-597578507bc2/front-250",
+	},
+	{
+		title: "Rollin' & Scratchin'",
+		artist: "Daft Punk",
+		coverArt: "https://coverartarchive.org/release/770b9b80-10e1-4297-b1fd-46ad0dbb0305/front-250",
+	},
+].map((song, index) => ({
+	...song,
+	id: index,
+	spotifyLink: "https://open.spotify.com/playlist/1KQ0ofHhPeQ20lS8C0B5Es",
+}));

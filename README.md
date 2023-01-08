@@ -1,8 +1,9 @@
 # Overflowed
 
-Overflowed is a small library allowing you to make your websites more responsive with collapsible
-lists. It's currently in it's alpha stage and the APIs are potentially unstable, but I aim to
-satisfy the following goals before a stable version.
+> **Warning**
+> This project is a WIP and not yet suitable for production use.
+
+Tiny library for creating responsive sites by preventing items from wrapping. Instead, an overflow item is displayed to interact with these now hidden items. This can be useful in navigation bars, toolbars, and item collections to maintain a clean and visually appealing layout.
 
 - ⚛️ Works across all major frameworks
 - 🌳 Lightweight and dependency-free, tree-shakable
@@ -26,23 +27,23 @@ pnpm add overflowed
 
 ## Progress
 
-- [ ] Documentation
-  - [ ] Getting started
-    - [ ] React
-    - [ ] Vue.js
-    - [ ] Svelte
-    - [ ] Preact
-    - [ ] SolidJS
-  - [ ] Examples
-  - [ ] Playground
-- [ ] `overflowed/core`
-- [ ] `overflowed/react`
-  - [ ] `useOverflowedItems`
-- [ ] `overflowed/vue`
-- [ ] `overflowed/svelte`
-  - [ ] `overflowedItems`
-- [ ] `overflowed/preact`
-- [ ] `overflowed/solid`
+- [] `overflowed/core`
+- [] `overflowed/react`
+  - [] `useOverflowedItems`
+- [] `overflowed/svelte`
+  - [] `overflowedItems`
+- [] Documentation
+  - [] Getting started
+    - [] React
+    - [] Svelte
+  - [] Examples
+
+## Future
+
+- [] `overflowed/vue`
+- [] `overflowed/preact`
+- [] `overflowed/solid`
+- [] Playground
 
 ## Usage
 
