@@ -37,6 +37,8 @@
 	"devDependencies": {
 		"@types/prettier": "2.7.2",
 		"@types/react": "*",
-		"@types/react-dom": "*"
+		"@types/react-dom": "*",
+		"sass": "^1.57.1",
+		"typescript-plugin-css-modules": "^4.1.1"
 	}
 }

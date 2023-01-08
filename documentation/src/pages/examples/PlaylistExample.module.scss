@@ -1,0 +1,90 @@
+.playlist {
+	display: block;
+	background-color: #121212;
+
+	> .songs {
+		display: flex;
+
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	
+		> .song {
+			> a > article {
+				position: relative;
+
+				> img {
+					vertical-align: bottom;
+				}
+
+				> header {
+					position: absolute;
+					bottom: 0;
+					width: 100%;
+					padding: 8px;
+				
+					opacity: 0;
+					transform: translateY(100%);
+				
+					transition: none 0.2s;
+					transition-property: opacity, transform;
+				
+					> h1, > h2 {
+						color: #fff;
+						text-shadow: 0 0 16px #222;
+						margin: 0;
+					}
+
+					> h1 {
+						font-size: 3vh;
+					}
+
+					> h2 {
+						font-size: 1.5vh;
+					}
+				}
+			}
+
+			&:hover, &:focus-visible {
+				> a > article > header {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+		}
+	
+		> .song img, > .indicator {
+			height: 20vh;
+		}
+	}
+}
+
+.cover {
+	position: relative;
+	color: white;
+}
+
+.indicator {
+	position: relative;
+	display: block;
+	aspect-ratio: 1 / 1;
+	height: 20vh;
+	transition: inset-inline-start 0.1s;
+}
+
+.indicator > a > img {
+	display: inline-block;
+	width: 50%;
+	height: 50%;
+	filter: brightness(50%);
+	vertical-align: bottom;
+}
+
+.indicator::after {
+	display: grid;
+	place-items: center;
+	content: attr(data-count) "+";
+	font-size: 4vh;
+	position: absolute;
+	inset: 0;
+}

@@ -5,7 +5,8 @@
 		"paths": {
 			"~/*": ["./src/*"],
 			"overflowed/*": ["../modules/*"]
-		}
+		},
+		"plugins": [{ "name": "typescript-plugin-css-modules" }]
 	},
 	"exclude": ["./dist"]
 }

@@ -6,6 +6,10 @@
 		"type": "git",
 		"url": "https://github.com/ahtcx/overflowed.git"
 	},
+	"bugs": {
+		"url": "https://github.com/ahtcx/overflowed/issues",
+		"email": "overflowed@aht.cx"
+	},
 	"main": "./index.js",
 	"module": "./index.mjs",
 	"types": "./index.d.ts",

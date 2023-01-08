@@ -192,11 +192,11 @@ export class Overflowed {
 			);
 
 			const newVisibleItemCount = Math.max(intersectingChildIndex - (this.indicatorElement ? 1 : 0), 0);
-			const newIndicatorElementOffset = breakpoints[newVisibleItemCount]?.[0]! + containerPaddingStart;
+			const newIndicatorElementOffset = breakpoints[newVisibleItemCount]![0] + containerPaddingStart;
 
 			this.onUpdate(newVisibleItemCount, newIndicatorElementOffset);
 		} else {
-			this.onUpdate(breakpoints.length, 0);
+			this.onUpdate(breakpoints.length, breakpoints[breakpoints.length - 1]![0] + containerPaddingStart);
 		}
 	}
 

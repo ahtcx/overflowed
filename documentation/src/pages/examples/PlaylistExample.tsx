@@ -4,19 +4,19 @@ import { useOverflowedItems } from "overflowed/react";
 import { songs } from "./data";
 
 // @docs-line-hidden
-import styles from "./PlaylistExample.module.css";
+import styles from "./PlaylistExample.module.scss";
 
 export const PlaylistExample = () => {
 	const [visibleSongs, overflowedSongs, { getContainerProps, getIndicatorProps }] = useOverflowedItems(songs);
 
 	return (
-		<>
+		<div className={styles.playlist}>
 			<h1>Liked Songs</h1>
-			<ul className={styles["container"]} {...getContainerProps()}>
+			<ul className={styles.songs} {...getContainerProps()}>
 				{visibleSongs.map(([song, getItemProps]) => (
-					<li key={song.id} {...getItemProps({ style: { transition: "opacity 0.2s" } })}>
+					<li key={song.id} className={styles.song} {...getItemProps({ style: { transition: "opacity 0.2s" } })}>
 						<a href={song.spotifyLink} target="_blank">
-							<article className={styles["cover"]}>
+							<article>
 								<img src={song.coverArt} />
 								<header>
 									<h1>{song.title}</h1>
@@ -26,14 +26,14 @@ export const PlaylistExample = () => {
 						</a>
 					</li>
 				))}
-				<li className={styles["indicator"]} data-count={overflowedSongs.length} {...getIndicatorProps()}>
+				<li className={styles.indicator} data-count={overflowedSongs.length} {...getIndicatorProps()}>
 					{overflowedSongs.slice(0, 4).map((song) => (
-						<a href={song.spotifyLink}>
-							<img key={song.id} src={song.coverArt} />
+						<a key={song.id} href={song.spotifyLink}>
+							<img src={song.coverArt} />
 						</a>
 					))}
 				</li>
 			</ul>
-		</>
+		</div>
 	);
 };
