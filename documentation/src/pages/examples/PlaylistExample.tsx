@@ -1,20 +1,33 @@
+import clsx from "clsx"; // @docs-line-hidden
 import { useOverflowedItems } from "overflowed/react";
+import { useState } from "react"; // @docs-line-hidden
 
-// @docs-line-hidden
-import { songs } from "./data";
+import { songs } from "./data"; // @docs-line-hidden
 
-// @docs-line-hidden
-import styles from "./PlaylistExample.module.scss";
+import styles from "./PlaylistExample.module.scss"; // @docs-line-hidden
 
 export const PlaylistExample = () => {
 	const [visibleSongs, overflowedSongs, { getContainerProps, getIndicatorProps }] = useOverflowedItems(songs);
+	const [isExpanded, setIsExpanded] = useState(false);
 
 	return (
-		<div className={styles.playlist}>
-			<h1>Liked Songs</h1>
-			<ul className={styles.songs} {...getContainerProps()}>
+		<article
+			className={styles.playlist} // @docs-line-hidden
+		>
+			<header>
+				<h1>Overflowed</h1>
+				<h2>Playlist</h2>
+			</header>
+			<ul
+				className={clsx(styles.songs, !isExpanded && styles.songsIsNotExpanded)} // @docs-line-hidden
+				{...getContainerProps()}
+			>
 				{visibleSongs.map(([song, getItemProps]) => (
-					<li key={song.id} className={styles.song} {...getItemProps({ style: { transition: "opacity 0.2s" } })}>
+					<li
+						key={song.id}
+						className={styles.song} // @docs-line-hidden
+						{...getItemProps()}
+					>
 						<a href={song.spotifyLink} target="_blank">
 							<article>
 								<img src={song.coverArt} />
@@ -26,14 +39,25 @@ export const PlaylistExample = () => {
 						</a>
 					</li>
 				))}
-				<li className={styles.indicator} data-count={overflowedSongs.length} {...getIndicatorProps()}>
-					{overflowedSongs.slice(0, 4).map((song) => (
-						<a key={song.id} href={song.spotifyLink}>
-							<img src={song.coverArt} />
-						</a>
-					))}
+				<li
+					className={styles.indicator} // @docs-line-hidden
+					data-count={overflowedSongs.length}
+					{...getIndicatorProps()}
+				>
+					<button onClick={() => setIsExpanded(true)} data-text={`+${overflowedSongs.length}`}>
+						{overflowedSongs.slice(0, 4).map((song) => (
+							<img key={song.id} src={song.coverArt} />
+						))}
+					</button>
 				</li>
+				{isExpanded && (
+					<li
+						className={styles.indicator} // @docs-line-hidden
+					>
+						<button onClick={() => setIsExpanded(false)} data-text="⨉" />
+					</li>
+				)}
 			</ul>
-		</div>
+		</article>
 	);
 };

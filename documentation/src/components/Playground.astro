@@ -12,7 +12,7 @@ export interface Props {
 
 const { lang, source } = Astro.props;
 
-const DOCS_HIDDEN_REGEX = /\/\/\s?@docs-line-hidden\n(.*)\n/g;
+const DOCS_HIDDEN_REGEX = /.*\/\/\s*@docs-line-hidden.*/gm;
 const TWO_MANY_NEWLINE_REGEX = /(\n(\s+)?){2,}\n/g;
 ---
 

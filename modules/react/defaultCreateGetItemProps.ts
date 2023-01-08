@@ -22,13 +22,8 @@ export const defaultCreateGetItemProps = ((overflowed, state, isHidden) =>
 			overflowed.registerItemElement(itemElement);
 		},
 		style: {
-			...(isHidden
-				? ({
-						userSelect: "none",
-						pointerEvents: "none",
-						opacity: 0,
-				  } as const)
-				: {}),
+			opacity: isHidden ? 0 : 1,
+			visibility: isHidden ? "hidden" : "visible",
 			...style,
 		} as const,
 		"aria-hidden": isHidden ? true : false,

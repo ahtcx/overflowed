@@ -81,6 +81,16 @@ export const songs = [
 		coverArt: "/assets/examples/playlist/jamiexx-idontknow.jpg",
 	},
 	{
+		title: "As It Was",
+		artist: "Harry Styles",
+		coverArt: "/assets/examples/playlist/harrystyles-asitwas.jpg",
+	},
+	{
+		title: "Remind Me",
+		artist: "High Contrast",
+		coverArt: "/assets/examples/playlist/highcontrast-remindme.jpg",
+	},
+	{
 		title: "Rollin' & Scratchin'",
 		artist: "Daft Punk",
 		coverArt: "/assets/examples/playlist/daftpunk-rollinandscratchin.jpg",
