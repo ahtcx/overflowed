@@ -21,8 +21,11 @@ $responsive-unit: min(1vw, 1vh);
 	}
 
 	> .songs {
+		display: flex;
+		flex-wrap: wrap;
+
 		&.songsIsNotExpanded {
-			display: flex;
+			flex-wrap: nowrap;
 		}
 
 		list-style: none;
@@ -30,8 +33,7 @@ $responsive-unit: min(1vw, 1vh);
 		padding: 0;
 
 		> li {
-			display: inline-block;
-			vertical-align: bottom;
+			display: inline-flex;
 		}
 
 		> .song {
@@ -50,7 +52,7 @@ $responsive-unit: min(1vw, 1vh);
 					position: absolute;
 					margin: 0;
 					bottom: 0;
-					width: 100%;
+					width: calc(100% - 2 * $responsive-unit);
 					padding: calc($responsive-unit * 1);
 
 					opacity: 0;
@@ -96,7 +98,7 @@ $responsive-unit: min(1vw, 1vh);
 		> .indicator {
 			position: relative;
 			background-color: #222;
-			transition: inset-inline-start 0.1s;
+			transition: inset-inline-start 0.1s, opacity 0.2s;
 			padding: 0;
 
 			> button {
@@ -115,7 +117,6 @@ $responsive-unit: min(1vw, 1vh);
 					width: 50%;
 					height: 50%;
 					filter: brightness(50%);
-					vertical-align: bottom;
 				}
 
 				&::after {

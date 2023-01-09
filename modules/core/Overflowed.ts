@@ -41,6 +41,7 @@ export class Overflowed {
 						// console.log(entry.target);
 					}
 				}
+
 				this.requestUpdate();
 			});
 
@@ -90,18 +91,6 @@ export class Overflowed {
 		return element.offsetHeight;
 	}
 
-	private getElementOffsetFromRight(element?: HTMLElement) {
-		if (!element) {
-			return 0;
-		}
-
-		if (this.axis === "horizontal") {
-			return this.getElementSize(element.parentElement) - this.getElementSize(element) - element.offsetLeft;
-		}
-
-		return this.getElementSize(element.parentElement) - this.getElementSize(element) - element.offsetTop;
-	}
-
 	private getElementOffsetFromLeft(element?: HTMLElement) {
 		if (!element) {
 			return 0;
@@ -112,6 +101,18 @@ export class Overflowed {
 		}
 
 		return element.offsetTop;
+	}
+
+	private getElementOffsetFromRight(element?: HTMLElement) {
+		if (!element) {
+			return 0;
+		}
+
+		if (this.axis === "horizontal") {
+			return this.getElementSize(element.parentElement) - this.getElementSize(element) - element.offsetLeft;
+		}
+
+		return this.getElementSize(element.parentElement) - this.getElementSize(element) - element.offsetTop;
 	}
 
 	private getElementComputedValues(element: HTMLElement) {
@@ -171,14 +172,27 @@ export class Overflowed {
 			.filter((element) => element !== this.indicatorElement)
 			.filter(isHtmlElement);
 
-		const getOffset = isRtl ? this.getElementOffsetFromRight.bind(this) : this.getElementOffsetFromLeft.bind(this);
+		const getOffsetFromStart = isRtl
+			? this.getElementOffsetFromRight.bind(this)
+			: this.getElementOffsetFromLeft.bind(this);
 
+		let issue = false;
 		const breakpoints: Breakpoint[] = [];
 		for (const childElement of childrenArray.values()) {
-			const childOffset = getOffset(childElement);
+			const childOffsetFromStart = getOffsetFromStart(childElement);
 			const childSize = this.getElementSize(childElement);
 
-			breakpoints.push([childOffset - containerPaddingStart, childOffset + childSize + containerPaddingEnd]);
+			const previousBreakpointEnd = breakpoints[breakpoints.length - 1]?.[1];
+
+			const breakpointStart = childOffsetFromStart - containerPaddingStart;
+			const breakpointEnd = childOffsetFromStart + childSize + containerPaddingEnd;
+
+			if (typeof previousBreakpointEnd !== "undefined" && breakpointEnd < previousBreakpointEnd) {
+				issue = true;
+				break;
+			}
+
+			breakpoints.push([breakpointStart, breakpointEnd]);
 		}
 
 		if (breakpoints.length === 0) {
@@ -186,7 +200,7 @@ export class Overflowed {
 		}
 
 		const containerIntersectingChildIndex = breakpoints.findIndex(([_start, end]) => end > containerElementSize);
-		if (containerIntersectingChildIndex !== -1) {
+		if (containerIntersectingChildIndex !== -1 && !issue) {
 			const intersectingChildIndex = breakpoints.findIndex(
 				([start, end]) => (this.indicatorElement ? start : end) > containerElementSize - indicatorElementSize,
 			);
@@ -195,8 +209,12 @@ export class Overflowed {
 			const newIndicatorElementOffset = breakpoints[newVisibleItemCount]![0] + containerPaddingStart;
 
 			this.onUpdate(newVisibleItemCount, newIndicatorElementOffset);
-		} else {
+		} else if (!issue) {
 			this.onUpdate(breakpoints.length, breakpoints[breakpoints.length - 1]![0] + containerPaddingStart);
+		} else {
+			this.onUpdate(childrenArray.length, breakpoints[breakpoints.length - 1]![0] + containerPaddingStart);
+
+			// TODO: warning or something? probably means items wrapped
 		}
 	}
 

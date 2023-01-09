@@ -73,32 +73,32 @@ export const songs = [
 	{
 		title: "Dribble",
 		artist: "Sycco",
-		coverArt: "/assets/examples/playlist/sycco-dribble.jpg",
+		coverArt: "/assets/examples/playlist/sycco_dribble.jpg",
 	},
 	{
 		title: "Idontknow",
 		artist: "Jamie xx",
-		coverArt: "/assets/examples/playlist/jamiexx-idontknow.jpg",
+		coverArt: "/assets/examples/playlist/jamie-xx_i-don-t-know.jpg",
 	},
 	{
 		title: "As It Was",
 		artist: "Harry Styles",
-		coverArt: "/assets/examples/playlist/harrystyles-asitwas.jpg",
+		coverArt: "/assets/examples/playlist/harry-styles_as-it-was.jpg",
 	},
 	{
 		title: "Remind Me",
 		artist: "High Contrast",
-		coverArt: "/assets/examples/playlist/highcontrast-remindme.jpg",
+		coverArt: "/assets/examples/playlist/high-contrast_remind-me.jpg",
 	},
 	{
 		title: "Rollin' & Scratchin'",
 		artist: "Daft Punk",
-		coverArt: "/assets/examples/playlist/daftpunk-rollinandscratchin.jpg",
+		coverArt: "/assets/examples/playlist/daft-punk_rollin-and-scratchin.jpg",
 	},
 	{
 		title: "Glue",
 		artist: "Bicep",
-		coverArt: "/assets/examples/playlist/bicep-glue.jpg",
+		coverArt: "/assets/examples/playlist/bicep_glue.jpg",
 	},
 ].map((song, index) => ({
 	...song,

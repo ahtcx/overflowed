@@ -28,6 +28,7 @@ export const defaultCreateGetIndicatorProps = ((overflowed, state, isVisible) =>
 			userSelect: isVisible ? undefined : "none",
 			pointerEvents: isVisible ? undefined : "none",
 			visibility: isVisible ? undefined : "hidden",
+			opacity: isVisible ? 1 : 0,
 			...style,
 		},
 	})) as CreateGetIndicatorProps<any>;
