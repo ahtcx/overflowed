@@ -1,5 +1,10 @@
+---
+import Logo from "./Logo.astro";
+---
+
 <div class="container">
 	<nav>
+		<Logo class="logo" />
 		<ul>
 			<li>
 				<a href="/">Home</a>
@@ -45,7 +50,7 @@
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		font-size: 1.3rem;
+		font-size: 1.5rem;
 	}
 
 	nav > ul > li {
@@ -53,10 +58,15 @@
 	}
 
 	nav > ul > li > ul {
-		font-size: 1.2rem;
+		font-size: 1.4rem;
 	}
 
 	a {
 		color: #fff;
+	}
+
+	.logo {
+		width: 96px;
+		height: 96px;
 	}
 </style>
