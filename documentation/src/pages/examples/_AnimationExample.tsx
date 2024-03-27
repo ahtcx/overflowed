@@ -4,7 +4,7 @@ import { useOverflowedItems } from "overflowed/react";
 import styles from "./AnimationExample.module.css";
 
 // @docs-line-hidden
-import { mulberry32 } from "./utilities";
+import { mulberry32 } from "./_utilities";
 
 // @docs-line-hidden
 const MINIMUM_DURATION_IN_MS = 8000;

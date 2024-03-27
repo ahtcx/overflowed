@@ -1,9 +1,9 @@
 import { useOverflowedItems } from "overflowed/react";
 
 // @docs-line-hidden
-import styles from "./NavigationExample.module.css";
+import styles from "./_NavigationExample.module.css";
 // @docs-line-hidden
-import { links } from "./data";
+import { links } from "./_data";
 
 export const NavigationExample = () => {
 	const [visibleLinks, overflowedLinks, { getContainerProps, getIndicatorProps }] = useOverflowedItems(links);

@@ -2,9 +2,9 @@ import clsx from "clsx"; // @docs-line-hidden
 import { useOverflowedItems } from "overflowed/react";
 import { useState } from "react"; // @docs-line-hidden
 
-import { songs } from "./data"; // @docs-line-hidden
+import { songs } from "./_data"; // @docs-line-hidden
 
-import styles from "./PlaylistExample.module.scss"; // @docs-line-hidden
+import styles from "./_PlaylistExample.module.scss"; // @docs-line-hidden
 
 export const PlaylistExample = () => {
 	const [visibleSongs, overflowedSongs, { getContainerProps, getIndicatorProps }] = useOverflowedItems(songs);

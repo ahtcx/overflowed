@@ -2,9 +2,9 @@
 	import { overflowedItems } from "overflowed/svelte";
 
 	// @docs-line-hidden
-	import "./AvatarExample.module.css";
+	import "./_AvatarExample.module.css";
 	// @docs-line-hidden
-	import { people } from "./data";
+	import { people } from "./_data";
 
 	let [visiblePeople, overflowedPeople, action] = overflowedItems(people, (newVisiblePeople, newOverflowedPeople) => {
 		visiblePeople = newVisiblePeople;

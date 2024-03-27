@@ -3,6 +3,7 @@ import { Code } from "astro/components";
 import { Resizable } from "./Resizable";
 import prettier from "prettier/standalone";
 import babylon from "prettier/parser-babel";
+import * as prettierPluginEstree from "prettier/plugins/estree";
 
 export interface Props {
 	children: any;
@@ -27,9 +28,9 @@ const TWO_MANY_NEWLINE_REGEX = /(\n(\s+)?){2,}\n/g;
 			<details class="source">
 				<summary>Source code</summary>
 				<Code
-					code={prettier.format(source.replace(DOCS_HIDDEN_REGEX, "").replace(TWO_MANY_NEWLINE_REGEX, "\n\n"), {
+					code={await prettier.format(source.replace(DOCS_HIDDEN_REGEX, "").replace(TWO_MANY_NEWLINE_REGEX, "\n\n"), {
 						parser: "babel",
-						plugins: [babylon],
+						plugins: [babylon, prettierPluginEstree],
 						printWidth: 120,
 					})}
 					lang={lang}
@@ -67,7 +68,9 @@ const TWO_MANY_NEWLINE_REGEX = /(\n(\s+)?){2,}\n/g;
 				var(--line-color-thin) 270deg,
 				#0000 0
 			);
-		background-size: var(--thick-interval) var(--thick-interval), var(--thin-interval) var(--thin-interval);
+		background-size:
+			var(--thick-interval) var(--thick-interval),
+			var(--thin-interval) var(--thin-interval);
 		background-position: 8px 8px;
 
 		overflow: hidden;

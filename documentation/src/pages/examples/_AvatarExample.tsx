@@ -1,9 +1,9 @@
 import { useOverflowedItems } from "overflowed/react";
 
 // @docs-line-hidden
-import styles from "./AvatarExample.module.css";
+import styles from "./_AvatarExample.module.css";
 // @docs-line-hidden
-import { stargazers } from "./data";
+import { stargazers } from "./_data";
 
 export const AvatarExample = () => {
 	const [visibleStargazers, overflowedStargazers, { getContainerProps, getIndicatorProps }] =
