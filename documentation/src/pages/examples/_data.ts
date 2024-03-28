@@ -105,3 +105,49 @@ export const songs = [
 	id: index,
 	spotifyLink: "https://open.spotify.com/playlist/1KQ0ofHhPeQ20lS8C0B5Es",
 }));
+
+export const toolbarItems = [
+	{
+		label: "File",
+		children: [
+			{ label: "New Tab" },
+			{ label: "New Window" },
+			{ label: "Open File..." },
+			{ label: "Close Tab" },
+			{ label: "Close Window" },
+		],
+	},
+	{
+		label: "Edit",
+		children: [
+			{ label: "Undo" },
+			{ label: "Redo" },
+			{ label: "Cut" },
+			{ label: "Copy" },
+			{ label: "Paste" },
+			{ label: "Delete" },
+			{ label: "Select All" },
+		],
+	},
+	{
+		label: "View",
+		children: [{ label: "Zoom In" }, { label: "Zoom Out" }, { label: "Actual Size" }, { label: "Enter Full Screen" }],
+	},
+	{
+		label: "History",
+		children: [
+			{ label: "Show All History" },
+			{ label: "Clear Recent History" },
+			{ label: "aht.cx" },
+			{ label: "overflowed.aht.cx" },
+			{ label: "hitchcox.me" },
+			{ label: "transitboard.app" },
+			{ label: "github.com" },
+			{ label: "localhost:1337" },
+		],
+	},
+	{
+		label: "Help",
+		children: [{ label: "Get Help" }, { label: "Share Ideas and Feedback" }],
+	},
+];

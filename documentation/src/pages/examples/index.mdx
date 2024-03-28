@@ -9,6 +9,17 @@ import Playground from "../../components/Playground.astro";
 This page contains various uses of Overflowed and it's implementation in each framework. You can
 resize the container by dragging the handle on the right side of each example.
 
+## Toolbar
+
+This example shows how an application toolbar could be implemented.
+
+import { ToolbarExample } from "./_ToolbarExample.tsx";
+import toolbarExampleSource from "./_ToolbarExample.tsx?raw";
+
+<Playground source={toolbarExampleSource} lang="tsx">
+	<ToolbarExample client:load />
+</Playground>
+
 ## Avatar groups
 
 This example shows a live list of GitHub stargazers as avatars. The end
