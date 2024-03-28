@@ -1,9 +1,10 @@
 import { useStore } from "@nanostores/react";
 import { useState } from "react";
+import type { Key } from "react-aria-components";
 
 import { tabStore } from "./store";
 
-export function useTabState(initialCurr: string, storeKey?: string): [string, (curr: string) => void] {
+export function useTabState(initialCurr: Key, storeKey?: string) {
 	const $tabStore = useStore(tabStore);
 
 	// Use localState when no storeKey is provided
@@ -15,9 +16,9 @@ export function useTabState(initialCurr: string, storeKey?: string): [string, (c
 	}
 
 	const curr = $tabStore[storeKey] ?? initialCurr;
-	function setCurr(newCurr: string) {
+	function setCurrent(newCurr: Key) {
 		if (storeKey) {
-			tabStore.setKey(storeKey,  newCurr );
+			tabStore.setKey(storeKey, String(newCurr));
 		} else {
 			throw new Error(
 				"[Tabs] Looks like a sharedStore key is no longer present on your tab view! If your store key is dynamic, consider using a static string value instead.",
@@ -25,5 +26,5 @@ export function useTabState(initialCurr: string, storeKey?: string): [string, (c
 		}
 	}
 
-	return [curr, setCurr];
+	return [curr, setCurrent] as const;
 }

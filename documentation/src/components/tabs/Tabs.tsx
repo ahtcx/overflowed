@@ -1,4 +1,4 @@
-import * as TabsRadix from "@radix-ui/react-tabs";
+import { Tabs as TabsRoot, TabList, Tab, TabPanel } from "react-aria-components";
 
 import { isValidElement, useEffect, useState } from "react";
 
@@ -70,19 +70,19 @@ export const Tabs = ({ sharedStore, ...slots }: TabsProps) => {
 	}
 
 	return (
-		<TabsRadix.Root value={value} onValueChange={(newValue) => setValue(newValue)}>
-			<TabsRadix.List className={styles["tabs"]}>
+		<TabsRoot selectedKey={value} onSelectionChange={(newValue) => setValue(newValue)}>
+			<TabList className={styles["tabs"]}>
 				{tabs.map(([key, content]) => (
-					<TabsRadix.Trigger key={key} className={styles["tab"]} value={getBaseKeyFromPanel(key)}>
+					<Tab key={key} className={styles["tab"]} id={getBaseKeyFromPanel(key)}>
 						{content}
-					</TabsRadix.Trigger>
+					</Tab>
 				))}
-			</TabsRadix.List>
+			</TabList>
 			{panels.map(([key, content]) => (
-				<TabsRadix.Content key={key} value={getBaseKeyFromPanel(key)}>
+				<TabPanel key={key} id={getBaseKeyFromPanel(key)}>
 					{content}
-				</TabsRadix.Content>
+				</TabPanel>
 			))}
-		</TabsRadix.Root>
+		</TabsRoot>
 	);
 };

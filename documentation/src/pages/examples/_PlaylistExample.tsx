@@ -30,7 +30,7 @@ export const PlaylistExample = () => {
 					>
 						<a href={song.spotifyLink} target="_blank">
 							<article>
-								<img src={song.coverArt} />
+								<img src={song.coverArt} alt="Cover Art" />
 								<header>
 									<h1>{song.title}</h1>
 									<h2>{song.artist}</h2>
@@ -46,7 +46,7 @@ export const PlaylistExample = () => {
 				>
 					<button onClick={() => setIsExpanded(true)} data-text={`+${overflowedSongs.length}`}>
 						{overflowedSongs.slice(0, 4).map((song) => (
-							<img key={song.id} src={song.coverArt} />
+							<img key={song.id} src={song.coverArt} alt="Cover Art" />
 						))}
 					</button>
 				</li>

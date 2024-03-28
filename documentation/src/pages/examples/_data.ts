@@ -66,7 +66,7 @@ export const links = [
 ].map((title, index) => ({
 	id: index,
 	title,
-	url: undefined,
+	url: "/",
 }));
 
 export const songs = [
